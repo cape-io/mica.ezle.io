@@ -27,6 +27,5 @@ module.exports = React.createClass
       else if field.element == 'textarea'
         fields.push TextArea props
     div
-      id: 'container-collection'
-      className: 'collection',
+      className: 'container',
         fields
