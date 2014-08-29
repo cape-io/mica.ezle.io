@@ -1,14 +1,18 @@
+---
 props:
   # probably can just use MICA email as it will be unique, and won't need the id
   # for tracking content and images, as well as building unique student urls
   mica_email:
-    type: email
-    required: true
-  student_id:
+    element: email
     type: text
     required: true
+  student_id:
+    element: false
+    type: text
+    required: false
   # the rest of these are what will actually show up on their 'page'
   firstname:
+    element: text
     type: text
     required: true
   lastname:
@@ -17,57 +21,80 @@ props:
   program: # based on their program we should be able to match them to a show date
     required: true
     type: select
-      options:
-        - name: 'Art Education MA'
-          value: 'art-education-mfa'
-        - name: 'Community Arts MFA'
-          value: 'community-arts-mfa'
-        - name: 'Critical Studies MA'
-          value: 'critical-studies-mfa'
-        - name: 'Curatorial Practice MFA'
-          value: 'curatorial-practice-mfa'
-        - name: 'Graphic Design MFA'
-          value: 'graphic-design-mfa'
-        - name: 'Illustration Practice MFA'
-          value: 'illustration-practice-mfa'
-        - name: 'Leroy E. Hoffberger School of Painting MFA'
-          value: 'leroy-e-hoffberfer-school-of-painting-mfa'
-        - name: 'Mount Royal School of Art MFA'
-          value: 'mount-royal-school-of-art-mfa'
-        - name: 'Photographic & Electronic Media MFA'
-          value: 'photographic-and-electronic-media-mfa'
-        - name: 'Post-Baccalaureate Fine Art'
-          value: 'post-baccalaureate-fine-art'
-        - name: 'Post-Baccalaureate Graphic Design'
-          value: 'post-baccalaureate-graphic-design'
-        - name: 'Rinehart School of Sculpture MFA'
-          value: 'rinehart-school-of-sculpture-mfa'
-        - name: 'Social Design MA'
-          value: 'social-design-ma'
-        - name: 'Studio Art MFA'
-          value: 'studio-art-mfa'
-        - name: 'Teaching MA'
-          value: 'teaching-ma'
+    options:
+      -
+        name: 'Art Education MA'
+        value: 'art-education-mfa'
+      -
+        name: 'Community Arts MFA'
+        value: 'community-arts-mfa'
+      -
+        name: 'Critical Studies MA'
+        value: 'critical-studies-mfa'
+      -
+        name: 'Curatorial Practice MFA'
+        value: 'curatorial-practice-mfa'
+      -
+        name: 'Graphic Design MFA'
+        value: 'graphic-design-mfa'
+      -
+        name: 'Illustration Practice MFA'
+        value: 'illustration-practice-mfa'
+      -
+        name: 'Leroy E. Hoffberger School of Painting MFA'
+        value: 'leroy-e-hoffberfer-school-of-painting-mfa'
+      -
+        name: 'Mount Royal School of Art MFA'
+        value: 'mount-royal-school-of-art-mfa'
+      -
+        name: 'Photographic & Electronic Media MFA'
+        value: 'photographic-and-electronic-media-mfa'
+      -
+        name: 'Post-Baccalaureate Fine Art'
+        value: 'post-baccalaureate-fine-art'
+      -
+        name: 'Post-Baccalaureate Graphic Design'
+        value: 'post-baccalaureate-graphic-design'
+      -
+        name: 'Rinehart School of Sculpture MFA'
+        value: 'rinehart-school-of-sculpture-mfa'
+      -
+        name: 'Social Design MA'
+        value: 'social-design-ma'
+      -
+        name: 'Studio Art MFA'
+        value: 'studio-art-mfa'
+      -
+        name: 'Teaching MA'
+        value: 'teaching-ma'
   exhibitionlocation:
     required: true
     type: select
-      options:
-        - name: 'D Center'
-          value: 'd-center'
-        - name: 'Decker'
-          value: 'decker'
-        - name: 'Fox 3'
-          value: 'fox-3'
-        - name: 'Leidy'
-          value: 'leidy'
-        - name: 'Meyerhoff'
-          value: 'meyerhoff'
-        - name: 'Off Campus'
-          value: 'off-campus'
-        - name: 'Pinkard'
-          value: 'pinkardr'
-        - name: 'Riggs'
-          value: 'riggs'
+    options:
+      -
+        name: 'D Center'
+        value: 'd-center'
+      -
+        name: 'Decker'
+        value: 'decker'
+      -
+        name: 'Fox 3'
+        value: 'fox-3'
+      -
+        name: 'Leidy'
+        value: 'leidy'
+      -
+        name: 'Meyerhoff'
+        value: 'meyerhoff'
+      -
+        name: 'Off Campus'
+        value: 'off-campus'
+      -
+        name: 'Pinkard'
+        value: 'pinkardr'
+      -
+        name: 'Riggs'
+        value: 'riggs'
   statement:
     type: text
     help: The statement you want to accompany your work.

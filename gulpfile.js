@@ -1,5 +1,5 @@
 (function() {
-  var browserSync, browserify, clean, coffeeify, data, fs, gulp, jade, less, path, r, rename, runSequence, source, watchify, yaml, zopfli;
+  var bd, browserSync, browserify, clean, coffeeify, data, fs, gulp, jade, less, path, r, rename, runSequence, source, watchify, yaml, zopfli;
 
   path = require('path');
 
@@ -18,6 +18,8 @@
   watchify = require('watchify');
 
   coffeeify = require('coffeeify');
+
+  bd = require('browserify-data');
 
   source = require('vinyl-source-stream');
 
@@ -72,6 +74,7 @@
     opts.extensions = ['.coffee', '.json'];
     w = watchify(browserify('./app/index.coffee', opts));
     w.transform(coffeeify);
+    w.transform(bd);
     bundle = function() {
       return w.bundle().pipe(source('app.js')).pipe(gulp.dest('./public/'));
     };
@@ -117,6 +120,7 @@
     };
     bundler = browserify(opts);
     bundler.transform(coffeeify);
+    bundler.transform(bd);
     bundler.add('./app/index.coffee');
     bundler.plugin('minifyify', {
       map: 'script.map.json',

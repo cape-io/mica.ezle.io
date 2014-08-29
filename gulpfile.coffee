@@ -10,7 +10,7 @@ browserSync = require 'browser-sync'
 browserify = require 'browserify'
 watchify = require 'watchify'
 coffeeify = require 'coffeeify'
-
+bd = require 'browserify-data'
 source = require('vinyl-source-stream')
 
 jade = require 'gulp-jade'
@@ -56,6 +56,7 @@ gulp.task 'compile', ->
   opts.extensions = ['.coffee', '.json']
   w = watchify(browserify('./app/index.coffee', opts))
   w.transform coffeeify
+  w.transform bd
   bundle = () ->
     w.bundle()
       .pipe(source('app.js'))
@@ -96,6 +97,7 @@ gulp.task 'prod_compile', (cb) ->
     extensions: ['.coffee', '.json']
   bundler = browserify opts
   bundler.transform coffeeify
+  bundler.transform bd
   bundler.add('./app/index.coffee')
   bundler.plugin 'minifyify',
     map: 'script.map.json'
