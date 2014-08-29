@@ -1,4 +1,4 @@
-When creating a model yaml file each file can contain the following.
+When creating a model yaml file each file can contain the following. Modified from https://github.com/prose/prose/wiki/Prose-Configuration
 
 * element: text/textarea/select/multiselect/number/hidden/false
 * label: (optional string) Label to the user
