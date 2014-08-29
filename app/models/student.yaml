@@ -7,15 +7,14 @@ props:
   student_id:
     type: text
     required: true
-  # the rest of this is what will actually show up on their 'page'
+  # the rest of these are what will actually show up on their 'page'
   firstname:
     type: text
     required: true
   lastname:
     type: text
     required: true
-  # based on their program we should be able to match them to a show date
-  program:
+  program: # based on their program we should be able to match them to a show date
     type: text
     required: true
   exhibitionlocation:
