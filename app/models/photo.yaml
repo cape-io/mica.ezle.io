@@ -12,6 +12,10 @@ props:
   year
     type: string
   description:
+    type: string
   img_height:
+    type: string
   img_width:
+    type: string
   sort_order:
+    type: number
