@@ -1,4 +1,8 @@
 props:
+  photo:
+    type: file
+  photo_cdn:
+    type: url
   title:
     type: string
     required: true
