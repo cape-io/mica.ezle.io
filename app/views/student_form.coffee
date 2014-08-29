@@ -1,5 +1,5 @@
 React = require 'react'
-{div, p} = require 'reactionary'
+{div, p, form, fieldset} = require 'reactionary'
 _ = require 'lodash'
 
 data = require '../models/student.yaml'
@@ -26,6 +26,11 @@ module.exports = React.createClass
         fields.push Select props
       else if field.element == 'textarea'
         fields.push TextArea props
-    div
-      className: 'container',
-        fields
+
+    form
+      className: 'form-horizontal',
+        fieldset {},
+          div
+            id: 'container-collection'
+            className: 'collection',
+              fields
