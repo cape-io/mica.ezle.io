@@ -4,6 +4,7 @@ _ = require 'lodash'
 
 data = require '../models/student.yaml'
 Text = require '../el/form/text'
+TextArea = require '../el/form/textarea'
 Select = require '../el/form/select'
 
 module.exports = React.createClass
@@ -19,10 +20,12 @@ module.exports = React.createClass
         help: field.help
         fieldType: field.element
         options: field.options
-      if _.contains ['text', 'email', 'textarea'], field.element
+      if _.contains ['text', 'email'], field.element
         fields.push Text props
       else if field.element == 'select'
         fields.push Select props
+      else if field.element == 'textarea'
+        fields.push TextArea props
     div
       id: 'container-collection'
       className: 'collection',
