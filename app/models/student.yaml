@@ -3,11 +3,11 @@ props:
     type: text
   program:
     type: text
-  firstname
+  firstname:
     type: text
   lastname:
     type: text
-  personal_website
+  personal_website:
     type: url
   student_id:
     type: text
