@@ -49,8 +49,25 @@ props:
         - name: 'Teaching MA'
           value: 'teaching-ma'
   exhibitionlocation:
-    type: reference?
     required: true
+    type: select
+      options:
+        - name: 'D Center'
+          value: 'd-center'
+        - name: 'Decker'
+          value: 'decker'
+        - name: 'Fox 3'
+          value: 'fox-3'
+        - name: 'Leidy'
+          value: 'leidy'
+        - name: 'Meyerhoff'
+          value: 'meyerhoff'
+        - name: 'Off Campus'
+          value: 'off-campus'
+        - name: 'Pinkard'
+          value: 'pinkardr'
+        - name: 'Riggs'
+          value: 'riggs'
   statement:
     type: text
     help: The statement you want to accompany your work.
