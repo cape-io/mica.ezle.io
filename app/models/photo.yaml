@@ -1,1 +1,15 @@
-fields: [title, size, medium, year, description, img_height, img_width, sort_order]
+props:
+  title:
+    type: string
+    required: true
+    help: Title of image.
+  size:
+    type: string
+    required: null
+    help: null
+  medium:
+    type: string
+  year
+    type: string
+    
+    description, img_height, img_width, sort_order]
