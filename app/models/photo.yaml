@@ -9,7 +9,7 @@ props:
     help: null
   medium:
     type: string
-  year
+  year:
     type: string
   description:
     type: string
