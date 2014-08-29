@@ -3,6 +3,8 @@ props:
   # probably can just use MICA email as it will be unique, and won't need the id
   # for tracking content and images, as well as building unique student urls
   mica_email:
+    label: MICA.edu email
+    help: Please enter your MICA.edu email
     element: email
     type: text
     required: true
@@ -11,16 +13,20 @@ props:
     type: text
     required: false
   # the rest of these are what will actually show up on their 'page'
-  firstname:
+  first_name:
+    label: First Name
     element: text
     type: text
     required: true
-  lastname:
+  last_name:
+    element: text
+    label: Last Name
     type: text
     required: true
   program: # based on their program we should be able to match them to a show date
+    type: string
     required: true
-    type: select
+    element: select
     options:
       -
         name: 'Art Education MA'
