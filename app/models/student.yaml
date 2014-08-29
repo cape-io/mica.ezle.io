@@ -1,17 +1,29 @@
 props:
-  statement:
+  # probably can just use MICA email as it will be unique, and won't need the id
+  # for tracking content and images, as well as building unique student urls
+  mica_email:
+    type: email
+    required: true
+  student_id:
     type: text
-  program:
-    type: text
+    required: true
+  # the rest of this is what will actually show up on their 'page'
   firstname:
     type: text
+    required: true
   lastname:
+    type: text
+    required: true
+  # based on their program we should be able to match them to a show date
+  program:
+    type: text
+    required: true
+  exhibitionlocation:
+    type: reference?
+    required: true
+  statement:
     type: text
   personal_website:
     type: url
-  student_id:
-    type: text
   personal_email:
     type: email
-  exhibitionlocation:
-    type: reference?
