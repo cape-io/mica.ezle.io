@@ -8,6 +8,7 @@ props:
     element: email
     type: text
     required: true
+    placeholder: '@mica.edu'
   student_id:
     element: false
     type: text
@@ -113,6 +114,7 @@ props:
     element: text
     label: Personal Website
     type: url
+    placeholder: http://
   personal_email:
     element: text
     label: Personal Email
