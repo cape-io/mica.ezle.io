@@ -24,6 +24,7 @@ props:
     type: text
     required: true
   program: # based on their program we should be able to match them to a show date
+    label: Program
     type: string
     required: true
     element: select
@@ -74,8 +75,10 @@ props:
         name: 'Teaching MA'
         value: 'teaching-ma'
   exhibitionlocation:
+    element: select
+    label: Exhibition Location
     required: true
-    type: select
+    type: text
     options:
       -
         name: 'D Center'
@@ -102,9 +105,15 @@ props:
         name: 'Riggs'
         value: 'riggs'
   statement:
+    element: textarea
+    label: Statement
     type: text
     help: The statement you want to accompany your work.
   personal_website:
+    element: text
+    label: Personal Website
     type: url
   personal_email:
+    element: text
+    label: Personal Email
     type: email

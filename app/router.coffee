@@ -9,5 +9,4 @@ module.exports = Router.extend
     'form': 'form'
 
   form: ->
-    console.log 'form'
     @setReactState section: 'form'
