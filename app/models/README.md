@@ -1,6 +1,6 @@
 When creating a model yaml file each file can contain the following.
 
-* element: text/textarea/select/multiselect/number
+* element: text/textarea/select/multiselect/number/hidden/false
 * label: (optional string) Label to the user
 * help: (optional string) Help/description to accompany a label
 * default: (optional string) A default value
