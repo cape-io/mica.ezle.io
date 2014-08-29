@@ -1,1 +1,17 @@
-fields: [statement, program, firstname, lastname, urlofpersonalwebsite, studentid, personalemail, exhibitionlocation]
+props:
+  statement:
+    type: text
+  program:
+    type: text
+  firstname
+    type: text
+  lastname:
+    type: text
+  personal_website
+    type: url
+  student_id:
+    type: text
+  personal_email:
+    type: email
+  exhibitionlocation:
+    type: reference?
