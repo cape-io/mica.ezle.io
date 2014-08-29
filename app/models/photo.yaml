@@ -11,5 +11,7 @@ props:
     type: string
   year
     type: string
-    
-    description, img_height, img_width, sort_order]
+  description:
+  img_height:
+  img_width:
+  sort_order:
