@@ -14,8 +14,8 @@ props:
   description:
     type: string
   img_height:
-    type: string
+    type: number
   img_width:
-    type: string
+    type: number
   sort_order:
     type: number
