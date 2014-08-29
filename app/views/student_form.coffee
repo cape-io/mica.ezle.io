@@ -31,6 +31,5 @@ module.exports = React.createClass
       className: 'form-horizontal',
         fieldset {},
           div
-            id: 'container-collection'
-            className: 'collection',
+            className: 'student-input',
               fields
