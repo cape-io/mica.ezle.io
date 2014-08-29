@@ -22,6 +22,7 @@ props:
     required: true
   statement:
     type: text
+    help: The statement you want to accompany your work.
   personal_website:
     type: url
   personal_email:
