@@ -41,6 +41,7 @@
     "qs": "^1.2.2",
     "superagent": "^0.18.2",
     "cookies-js": "^0.4.0",
-    "marked": "^0.3.2"
+    "marked": "^0.3.2",
+    "react-bootstrap": "^0.11.1"
   }
 }
