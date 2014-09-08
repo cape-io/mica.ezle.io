@@ -1,5 +1,5 @@
 React = require 'react'
-{h1, div} = require 'reactionary'
+{h1, div, p} = require 'reactionary'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
@@ -26,19 +26,26 @@ module.exports = React.createClass
 
   render: ->
     div
-      className: 'container',
-        h1 'Login'
-        Input
-          type: 'text'
-          value: @state.email
-          placeholder: 'Enter MICA email'
-          label: 'You MICA email please'
-          help: 'No need to include @mica.edu'
-          bsStyle: @validationState()
-          ref: 'email'
-          hasFeedback: true
-          groupClassName: 'group-class-customize-me'
-          wrapperClassName: 'wrapper-class-customize-me'
-          labelClassName: 'label-class-editable'
-          onChange: @changeEmail
-          addonAfter: '@mica.edu'
+      className: 'container login',
+        div
+          className: 'row',
+            div
+              className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3',
+                h1 'Login'
+                p
+                  className: 'lead',
+                  'MICA Grad Show 2015',
+                Input
+                  type: 'text'
+                  value: @state.email
+                  placeholder: 'Enter MICA email'
+                  label: 'You MICA email please'
+                  help: 'No need to include @mica.edu (e.g. if your email is kbjornard@mica.edu, you would just enter kbjornard)'
+                  bsStyle: @validationState()
+                  ref: 'email'
+                  hasFeedback: true
+                  groupClassName: 'group-class-customize-me'
+                  wrapperClassName: 'wrapper-class-customize-me'
+                  labelClassName: 'label-class-editable'
+                  onChange: @changeEmail
+                  addonAfter: '@mica.edu'

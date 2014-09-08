@@ -32,6 +32,7 @@ module.exports = React.createClass
       type: 'file'
       id: 'fileImg'
       accept:"image/jpg, image/jpeg"
+      className: "col-md-4 col-md-offset-4"
       onChange: (input) =>
         #Screw you art kid, stop trying to be unique! — only jpgs allowed.
         #fileInput = @refs['fileImg'].getDOMNode()
