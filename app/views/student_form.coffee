@@ -31,6 +31,7 @@ module.exports = React.createClass
       key: 'files'
       type: 'file'
       id: 'fileImg'
+      accept:"image/jpg, image/jpeg"
       onChange: (input) =>
         #fileInput = @refs['fileImg'].getDOMNode()
         fileInput = document.getElementById("fileImg")
