@@ -109,7 +109,7 @@ props:
     element: textarea
     label: Statement
     type: text
-    help: The statement you want to accompany your work.
+    help: The statement you want to accompany your work. *Italic* **Bold**.
   personal_website:
     element: text
     label: Personal Website
