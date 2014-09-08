@@ -5,6 +5,7 @@ _ = require 'lodash'
 Router = require './router'
 
 StudentForm = require './views/student_form'
+Login = require './views/login'
 
 module.exports = React.createClass
   #getInitialState: ->
@@ -41,6 +42,7 @@ module.exports = React.createClass
     header = false
     component = switch section
       when 'form' then StudentForm props
+      when 'login' then Login props
       else @brokenEl(section)
     footer = false
 
