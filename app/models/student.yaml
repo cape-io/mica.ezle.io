@@ -82,9 +82,6 @@ props:
     type: text
     options:
       -
-        name: 'D Center'
-        value: 'd-center'
-      -
         name: 'Decker'
         value: 'decker'
       -
@@ -96,6 +93,9 @@ props:
       -
         name: 'Meyerhoff'
         value: 'meyerhoff'
+      -
+        name: 'North Avenue Market'
+        value: 'north-avenue-market'
       -
         name: 'Off Campus'
         value: 'off-campus'
