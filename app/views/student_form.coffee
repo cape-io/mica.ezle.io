@@ -27,22 +27,6 @@ module.exports = React.createClass
         fields.push Select props
       else if field.element == 'textarea'
         fields.push TextArea props
-    fields.push Input
-      key: 'files'
-      type: 'file'
-      id: 'fileImg'
-      accept:"image/jpg, image/jpeg"
-      className: "col-md-4 col-md-offset-4"
-      onChange: (input) =>
-        #Screw you art kid, stop trying to be unique! — only jpgs allowed.
-        #fileInput = @refs['fileImg'].getDOMNode()
-        fileInput = document.getElementById("fileImg")
-        if fileInput.files and fileInput.files[0]
-          reader = new FileReader()
-          reader.onload = (e) =>
-            console.log 'file change'
-            @setState imgSrc: e.target.result
-          reader.readAsDataURL fileInput.files[0]
 
     if @state and @state.imgSrc
       console.log 'lshow img'
@@ -51,9 +35,11 @@ module.exports = React.createClass
         src: @state.imgSrc
         alt: 'preview image'
 
-    form
-      className: 'form-horizontal',
-        fieldset {},
-          div
-            className: 'student-input',
-              fields
+    div
+      className: 'artist-input',
+        form
+          className: 'form-horizontal',
+            fieldset {},
+              div
+                className: 'student-input',
+                  fields

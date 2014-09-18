@@ -1,20 +1,31 @@
 props:
   photo:
     type: file
+    element: file
+    label: Image
+    accept: "image/jpg, image/jpeg"
   photo_cdn:
     type: url
   title:
     type: string
+    label: Title
     required: true
     help: Title of image.
+    element: text
   size:
+    label: Size
     type: string
     required: null
     help: null
+    element: text
   medium:
     type: string
+    element: text
+    label: Medium
   year:
     type: string
+    element: text
+    label: Year
   description:
     type: string
   img_height:
