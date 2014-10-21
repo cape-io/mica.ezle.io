@@ -23,10 +23,16 @@ runSequence = require 'run-sequence'
 
 data = yaml.safeLoad fs.readFileSync('data.yaml', 'utf8')
 
-gulp.task "browser-sync", ->
-  browserSync.init "public/**",
+gulp.task "default", ['browser-sync'], ->
+  gulp.watch "templates/*.jade", ["templates"]
+  gulp.watch "styles/*.less", ["styles"]
+  gulp.watch 'images/**', ['copy']
+  return
+
+gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy'] ->
+  browserSync.init "dev/**",
     server:
-      baseDir: "public" # Change this to your web root dir
+      baseDir: "dev" # Change this to your web root dir
     injectChanges: false
     logConnections: true
     ghostMode:
@@ -39,17 +45,17 @@ gulp.task "templates", ->
 
   gulp.src("templates/*.jade")
     .pipe jade(locals: data)
-    .pipe gulp.dest("./public/")
+    .pipe gulp.dest("./dev/")
   return
 
 gulp.task 'copy', ->
   gulp.src('./images/**')
-    .pipe gulp.dest('./public/images/')
+    .pipe gulp.dest('./dev/images/')
 
 gulp.task 'styles', ->
   gulp.src(["styles/app.less", 'styles/print.less', 'styles/iefix.less'])
     .pipe less(paths: [path.join(__dirname, "less", "includes")])
-    .pipe gulp.dest("./public")
+    .pipe gulp.dest("./dev")
 
 gulp.task 'compile', ->
   opts = watchify.args
@@ -60,15 +66,9 @@ gulp.task 'compile', ->
   bundle = () ->
     w.bundle()
       .pipe(source('app.js'))
-      .pipe(gulp.dest('./public/'))
+      .pipe(gulp.dest('./dev/'))
   w.on('update', bundle)
   bundle()
-  return
-
-gulp.task "default", ['compile', 'styles', 'templates', 'browser-sync', 'copy'], ->
-  gulp.watch "templates/*.jade", ["templates"]
-  gulp.watch "styles/*.less", ["styles"]
-  gulp.watch 'images/**', ['copy']
   return
 
 # - - - - prod - - - -
@@ -117,10 +117,10 @@ gulp.task 'prod_template', ->
     .pipe gulp.dest("./prod/")
 
 gulp.task 'copy_css', ['styles'], ->
-  gulp.src('./public/app.css')
+  gulp.src('./dev/app.css')
     .pipe(rename(global.sha+'.css'))
     .pipe(gulp.dest('./prod'))
-  gulp.src('./public/print.css', './public/iefix.css')
+  gulp.src('./dev/print.css', './dev/iefix.css')
     .pipe(gulp.dest('./prod'))
   gulp.src('./images/**')
     .pipe gulp.dest('./prod/images/')
