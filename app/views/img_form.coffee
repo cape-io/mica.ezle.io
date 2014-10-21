@@ -12,7 +12,9 @@ module.exports = React.createClass
   getInitialState: ->
     fieldQty: 1
 
-  addImg: ->
+  addImg: (e) ->
+    if e.preventDefault
+      e.preventDefault()
     if @state.fieldQty < 20
       @setState fieldQty: @state.fieldQty + 1
     return
