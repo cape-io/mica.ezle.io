@@ -29,7 +29,7 @@ gulp.task "default", ['browser-sync'], ->
   gulp.watch 'images/**', ['copy']
   return
 
-gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy'] ->
+gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy'], ->
   browserSync.init "dev/**",
     server:
       baseDir: "dev" # Change this to your web root dir

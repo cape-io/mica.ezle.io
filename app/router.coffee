@@ -5,10 +5,11 @@ Router = require 'ampersand-router'
 module.exports = Router.extend
 
   routes:
-    '': 'form'
+    '': 'login'
     'form': 'form'
     'form/imgs': 'imgs'
     'login': 'login'
+    'img': 'img'
 
   form: ->
     @setReactState section: 'form'
@@ -18,3 +19,7 @@ module.exports = Router.extend
 
   login: ->
     @setReactState section: 'login'
+
+  img: ->
+    console.log 'img'
+    @setReactState section: 'img'

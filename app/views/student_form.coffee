@@ -13,6 +13,7 @@ module.exports = React.createClass
   render: ->
     fields = []
     _.forEach data.props, (field, fieldId) ->
+      if fieldId == 'mica_email' then return
       props =
         key: fieldId
         id: fieldId
@@ -43,3 +44,7 @@ module.exports = React.createClass
               div
                 className: 'student-input',
                   fields
+                  Input
+                    type: 'submit'
+                    onClick: ->
+                      app.container.router.redirectTo('form/imgs')

@@ -7,6 +7,7 @@ Router = require './router'
 StudentForm = require './views/student_form'
 Login = require './views/login'
 Imgs = require './views/img_form'
+Img = require './views/img_upload'
 
 module.exports = React.createClass
   #getInitialState: ->
@@ -45,6 +46,7 @@ module.exports = React.createClass
       when 'form' then StudentForm props
       when 'imgs' then Imgs props
       when 'login' then Login props
+      when 'img' then Img props
       else @brokenEl(section)
     footer = false
 
