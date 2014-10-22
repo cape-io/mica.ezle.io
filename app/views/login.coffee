@@ -1,5 +1,5 @@
 React = require 'react'
-{h1, div, fieldset, p} = require 'reactionary'
+{h1, div, fieldset, p, a} = require 'reactionary'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
@@ -30,9 +30,13 @@ module.exports = React.createClass
 
   render: ->
     if @state.checkEmail
-      actionDiv =
+      actionDiv = div null,
         p className: 'lead',
           'Great! Please check your email for a link to access the upload area.'
+        p null,
+          a
+            href: '#form',
+              '[demo next]'
     else
       actionDiv =
         fieldset null,
