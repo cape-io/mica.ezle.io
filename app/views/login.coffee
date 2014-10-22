@@ -66,5 +66,5 @@ module.exports = React.createClass
                 h1 'Login'
                 p
                   className: 'lead',
-                  'MICA Grad Show 2015',
+                    'MICA Grad Show 2015'
                 actionDiv

@@ -46,5 +46,6 @@ module.exports = React.createClass
                   fields
                   Input
                     type: 'submit'
-                    onClick: ->
+                    onClick: (e) ->
+                      e.preventDefault()
                       app.container.router.redirectTo('form/imgs')
