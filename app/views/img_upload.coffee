@@ -14,44 +14,6 @@ module.exports = React.createClass
     max_file_count: '50'
     expires: '1413833194'
     signature: ''
-    fileHover: false
-    files: null
-
-  handleFileSelect: (e) ->
-    # Disable defaults. Toggle off 'hover' class.
-    @handleFileHover(e)
-    # Fetch file list object.
-    files = e.target.files or e.dataTransfer.files
-    # Process the files
-    fileArray = []
-    fileArray.push file for file in files
-    @setState files: fileArray
-    fileArray.forEach (file, i) =>
-      @parseFile file, i
-      @uploadFile file
-
-  parseFile: (file, i) ->
-    if file.type.indexOf("image") is 0
-      reader = new FileReader()
-      reader.onload = (e) =>
-        imgs = @state.files
-        imgs[i].src = e.target.result
-        @setState files: imgs
-        return
-      reader.readAsDataURL file
-
-  uploadFile: (file) ->
-    xhr = new XMLHttpRequest()
-    formData = new FormData()
-    #formData.append('redirect', @state.redirect)
-    formData.append('max_file_size', @state.max_file_size)
-    formData.append('max_file_count', @state.max_file_count)
-    formData.append('expires', @state.expires)
-    formData.append('signature', @state.signature)
-    formData.append('file1', file)
-
-    xhr.open 'POST', @state.url, true
-    xhr.send formData
 
   # This is mostly just to set the hover class.
   handleFileHover: (e) ->
@@ -64,16 +26,33 @@ module.exports = React.createClass
       @setState fileHover: false
     return
 
+  # Drop or Select
+  handleFileSelect: (e) ->
+    # Disable defaults. Toggle off 'hover' class.
+    @handleFileHover(e)
+    # Fetch file list object.
+    files = e.target.files or e.dataTransfer.files
+    # Process the files
+    addFile = (file) ->
+      file.name = 'test.jpg'
+      app.images.add
+        file: file
+        fileName: file.name,
+          parse: true
+    addFile file for file in files
+
   componentWillMount: ->
-    agent.get 'http://cf.webscript.io/token?folder=kai', (res) =>
+    agent.get 'http://cf.webscript.io/token?folder=t', (res) =>
       res.body.loading = false
+      app.uploadInfo = res.body
       @setState res.body
 
   componentDidMount: ->
-    fileselect = @refs.fileselect.getDOMNode()
-    filedrag = @refs.filedrag.getDOMNode()
-    submitbutton = @refs.submitbutton.getDOMNode()
-    # File select.
+    # Every time an images changes its src update the view.
+    app.images.on 'change:src', =>
+      @forceUpdate()
+    app.images.on 'change:progress', =>
+      @forceUpdate()
 
   renderFile: (file) ->
     if file.src
@@ -84,8 +63,8 @@ module.exports = React.createClass
     else
       image = false
     p
-      key: file.key,
-        'File name: '+file.name+' type: '+file.type+' size: '+file.size+' bytes'
+      key: file.fileName,
+        'File name: '+file.fileName+' type: '+file.type+' size: '+file.bytes+' bytes. Progress: '+file.progress+'%'
         image
 
   render: ->
@@ -93,14 +72,12 @@ module.exports = React.createClass
       msg = 'Getting upload creds from server.'
     else
       msg = 'Upload creds received. '+@state.signature
-    if @state.files
-      files = @state.files.map (file) =>
-        file.key = file.name
-        @renderFile(file)
-      # console.log @state.files[0].name
-      # files = p 'files'
+
+    if app.images.length
+      files = app.images.map @renderFile
     else
       files = p 'No files yet.'
+
     div null,
       form
         method: 'POST'

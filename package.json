@@ -43,6 +43,7 @@
     "superagent": "^0.18.2",
     "cookies-js": "^0.4.0",
     "marked": "^0.3.2",
-    "react-bootstrap": "^0.11.1"
+    "react-bootstrap": "^0.11.1",
+    "ampersand-rest-collection": "^2.0.3"
   }
 }

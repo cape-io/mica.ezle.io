@@ -21,5 +21,4 @@ module.exports = Router.extend
     @setReactState section: 'login'
 
   img: ->
-    console.log 'img'
     @setReactState section: 'img'
