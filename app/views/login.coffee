@@ -44,7 +44,7 @@ module.exports = React.createClass
             type: 'text'
             value: @state.email
             placeholder: 'Enter MICA email'
-            label: 'You MICA email please'
+            label: 'Your MICA email please'
             help: 'No need to include @mica.edu (e.g. if your email is kbjornard@mica.edu, you would just enter kbjornard)'
             bsStyle: @validationState()
             ref: 'email'
