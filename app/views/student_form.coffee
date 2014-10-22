@@ -1,5 +1,5 @@
 React = require 'react'
-{div, p, form, fieldset, img} = require 'reactionary'
+{div, h1, p, form, fieldset, img} = require 'reactionary'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
@@ -38,6 +38,7 @@ module.exports = React.createClass
 
     div
       className: 'artist-input',
+        h1 'Student Info'
         form
           className: 'form-horizontal',
             fieldset {},

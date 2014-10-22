@@ -26,16 +26,32 @@ module.exports = React.createClass
     fileArray = []
     fileArray.push file for file in files
     @setState files: fileArray
-    # files.forEach (file) =>
-    #   @parseFile file
+    fileArray.forEach (file, i) =>
+      @parseFile file, i
+      @uploadFile file
 
-    # fileInput = document.getElementById("fileImg")
-    # if fileInput.files and fileInput.files[0]
-    #   reader = new FileReader()
-    #   reader.onload = (e) =>
-    #     console.log 'file change'
-    #     @setState imgSrc: e.target.result
-    #   reader.readAsDataURL fileInput.files[0]
+  parseFile: (file, i) ->
+    if file.type.indexOf("image") is 0
+      reader = new FileReader()
+      reader.onload = (e) =>
+        imgs = @state.files
+        imgs[i].src = e.target.result
+        @setState files: imgs
+        return
+      reader.readAsDataURL file
+
+  uploadFile: (file) ->
+    xhr = new XMLHttpRequest()
+    formData = new FormData()
+    #formData.append('redirect', @state.redirect)
+    formData.append('max_file_size', @state.max_file_size)
+    formData.append('max_file_count', @state.max_file_count)
+    formData.append('expires', @state.expires)
+    formData.append('signature', @state.signature)
+    formData.append('file1', file)
+
+    xhr.open 'POST', @state.url, true
+    xhr.send formData
 
   # This is mostly just to set the hover class.
   handleFileHover: (e) ->
@@ -49,7 +65,7 @@ module.exports = React.createClass
     return
 
   componentWillMount: ->
-    agent.get 'http://cf.webscript.io/token', (res) =>
+    agent.get 'http://cf.webscript.io/token?folder=kai', (res) =>
       res.body.loading = false
       @setState res.body
 
@@ -60,9 +76,17 @@ module.exports = React.createClass
     # File select.
 
   renderFile: (file) ->
+    if file.src
+      image =
+        img
+          src: file.src
+          width: '400'
+    else
+      image = false
     p
       key: file.key,
         'File name: '+file.name+' type: '+file.type+' size: '+file.size+' bytes'
+        image
 
   render: ->
     if @state.loading
@@ -78,8 +102,6 @@ module.exports = React.createClass
     else
       files = p 'No files yet.'
     div null,
-      p msg
-      files
       form
         method: 'POST'
         action: @state.url
@@ -87,10 +109,10 @@ module.exports = React.createClass
         className: 'form-horizontal',
           fieldset null,
             legend 'HTML File Upload'
-            input
-              type: 'hidden'
-              name: 'redirect'
-              value: @state.redirect
+            # input
+            #   type: 'hidden'
+            #   name: 'redirect'
+            #   value: @state.redirect
             input
               type: 'hidden'
               name: 'max_file_size'
@@ -130,8 +152,10 @@ module.exports = React.createClass
                     'or drop', br(null), 'files here'
             div
               ref: 'submitbutton'
-              style: {display: 'none'}
+              #style: {display: 'none'}
               id: 'submitbutton',
                 button
                   type: 'submit',
                     'Upload Files'
+      files
+      p msg
