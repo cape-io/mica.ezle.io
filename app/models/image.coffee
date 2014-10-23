@@ -7,6 +7,8 @@ module.exports = Model.extend
     bytes: 'number'
     type: 'string'
     uploaded: 'boolean'
+    md5: 'string'
+    lastModified: 'string'
   session:
     file: 'object'
     progress: 'number'
@@ -39,18 +41,22 @@ module.exports = Model.extend
     if img.file
       img.bytes = img.file.size
       img.type = img.file.type
+    if img.md5
+      img.uploaded = true
+      img.progress = 100
     return img
 
   processImgFile: ->
-    if @type.indexOf("image") is 0 and 3000000 > @bytes
-      reader = new FileReader()
-      reader.onload = (e) =>
-        @fileData = e.target.result
+    if @type and @file and @type.indexOf("image") is 0
+      if 3000000 > @bytes
+        reader = new FileReader()
+        reader.onload = (e) =>
+          @fileData = e.target.result
+          @uploadFile()
+          return
+        reader.readAsDataURL @file
+      else
         @uploadFile()
-        return
-      reader.readAsDataURL @file
-    else
-      @uploadFile()
 
   handleFinish: (e) ->
     if xhr.readyState is 4

@@ -49,6 +49,8 @@ module.exports = React.createClass
 
   componentDidMount: ->
     # Every time an images changes its src update the view.
+    app.images.on 'add', =>
+      @forceUpdate()
     app.images.on 'change:src', =>
       @forceUpdate()
     app.images.on 'change:progress', =>
