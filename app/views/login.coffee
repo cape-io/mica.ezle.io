@@ -1,70 +1,64 @@
 React = require 'react'
 {h1, div, fieldset, p, a} = require 'reactionary'
+{Navigation} = require 'react-router'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
+validUsers = require '../models/users'
+
+# validUsers.forEach (id) ->
+#   validUsers.forEach (usr) ->
+#     if id != usr and _.contains usr, id
+#       console.log usr, id
+
 module.exports = React.createClass
+  mixins: [Navigation]
   getInitialState: ->
     email: ''
     checkEmail: false
 
-  handleSubmit: ->
-    @setState checkEmail: true
-
-  validationState: ->
-    email = @state.email
-    unless email then return
-    #unless _.contains email, '@' then return 'warning'
-
-    validEmails = ['kb', 'kc', 'kbjornard']
-    if _.contains validEmails, email
-      'success'
-    else
-      'error'
+  handleSubmit: (email) ->
+    app.me.email = email
+    app.me.requestToken (res) =>
+      if res
+        @transitionTo('checkEmail')
+      else
+        @transitionTo('loginFail')
+      return
+    @transitionTo('emailPending')
 
   changeEmail: ->
     email = @refs.email.getValue()
     if _.contains email, '@'
       email = email.split('@')[0]
-    @setState email: email
+    if _.contains email, '.'
+      email = email.split('.')[0]
+    email = email.replace 'mica', ''
+    email = email.replace 'edu', ''
+    # Validate email.
+    if _.contains validUsers, email
+      @handleSubmit(email)
+    else
+      @setState
+        emailStatus: 'error'
+        email: email
 
   render: ->
-    if @state.checkEmail
-      actionDiv = div null,
-        p className: 'lead',
-          'Great! Please check your email for a link to access the upload area.'
-        p null,
-          a
-            href: '#form',
-              '[demo next]'
-    else
-      actionDiv =
-        fieldset null,
-          Input
-            type: 'text'
-            value: @state.email
-            placeholder: 'Enter MICA email'
-            label: 'Your MICA email please'
-            help: 'No need to include @mica.edu (e.g. if your email is kbjornard@mica.edu, you would just enter kbjornard)'
-            bsStyle: @validationState()
-            ref: 'email'
-            hasFeedback: true
-            groupClassName: 'group-class-customize-me'
-            wrapperClassName: 'wrapper-class-customize-me'
-            labelClassName: 'label-class-editable'
-            onChange: @changeEmail
-            addonAfter: '@mica.edu'
-          Input
-            type: 'submit'
-            onClick: @handleSubmit
-    div
-      className: 'container login',
-        div
-          className: 'row',
-            div
-              className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3',
-                h1 'Login'
-                p
-                  className: 'lead',
-                    'MICA Grad Show 2015'
-                actionDiv
+    fieldset null,
+      Input
+        type: 'text'
+        value: @state.email
+        placeholder: 'Enter MICA email'
+        label: 'Your MICA email please'
+        help: 'No need to include @mica.edu (e.g. if your email is kbjornard@mica.edu, you would just enter kbjornard)'
+        bsStyle: @state.emailStatus
+        ref: 'email'
+        hasFeedback: true
+        groupClassName: 'group-class-customize-me'
+        wrapperClassName: 'wrapper-class-customize-me'
+        labelClassName: 'label-class-editable'
+        onChange: @changeEmail
+        addonAfter: '@mica.edu'
+      # Input
+      #   type: 'submit'
+      #   onClick: @handleSubmit

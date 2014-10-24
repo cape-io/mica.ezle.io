@@ -71,6 +71,17 @@ gulp.task 'compile', ->
   bundle()
   return
 
+gulp.task 'updateUsers', (cb) ->
+  r 'https://mica.cape.io/9df66d7d/updateUsers.json', (err, resp, body) ->
+    throw err if err
+    console.log body
+    cb()
+
+gulp.task 'data', ['updateUsers'], ->
+  r('http://mica.cape.io.ld:8000/9df66d7d/emails.json')
+    .pipe source('users.json')
+    .pipe gulp.dest('./app/models/')
+
 # - - - - prod - - - -
 
 gulp.task 'set_sha', (cb) ->
