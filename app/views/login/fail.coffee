@@ -6,8 +6,9 @@ module.exports = React.createClass
 
   render: ->
     div null,
-      p className: 'lead',
-        'We are terribly sorry! Some crazy solar flare must have disrupted the internet. ',
+      p className: 'lead text-warning',
+        'We are terribly sorry! Some crazy celestial event must have disrupted the internet. ',
           Link(to:'login', 'Please try again.')
-      p 'We were not able to send you an email. To try again please go back to the ',
-        Link(to:'login', 'login page.')
+      p className: '',
+        'We were not able to send you an email. To try again please go back to the ',
+          Link(to:'login', 'login page.')

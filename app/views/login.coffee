@@ -38,6 +38,10 @@ module.exports = React.createClass
     # Validate email.
     if _.contains validUsers, email
       @handleSubmit(email)
+    else if email is ''
+      @setState
+        emailStatus: null
+        email: email
     else
       @setState
         emailStatus: 'error'

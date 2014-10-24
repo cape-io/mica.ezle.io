@@ -6,5 +6,5 @@ module.exports = React.createClass
 
   render: ->
     div null,
-      p className: 'lead',
+      p className: 'lead text-info',
         'One moment please... We are sending you an email.'
