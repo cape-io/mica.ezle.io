@@ -6,7 +6,7 @@ module.exports = React.createClass
   #getInitialState: ->
   mixins: [RouteContext]
   render: ->
-    console.log RouteContext
+    #console.log RouteContext
     div
       className: 'container login',
         div

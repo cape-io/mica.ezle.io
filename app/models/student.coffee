@@ -16,7 +16,7 @@ module.exports = Model.extend
   requestToken: (cb) ->
     if @email
       console.log 'request'
-      r.post 'http://mica.cape.io.ld:8000/sendtoken', {email: @email}, (err, res) =>
+      r.post 'https://mica.ezle.io/sendtoken', {email: @email}, (err, res) =>
         if res.body.msgId
           @emailSent = true
           cb(true)

@@ -1,5 +1,6 @@
 React = require 'react'
 {h1, div, fieldset, p, a} = require 'reactionary'
+{Navigation} = require 'react-router'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
@@ -11,6 +12,7 @@ validUsers = require '../models/users'
 #       console.log usr, id
 
 module.exports = React.createClass
+  mixins: [Navigation]
   getInitialState: ->
     email: ''
     checkEmail: false
@@ -19,17 +21,11 @@ module.exports = React.createClass
     app.me.email = email
     app.me.requestToken (res) =>
       if res
-        @setState checkEmail: true
+        @transitionTo('checkEmail')
+      else
+        @transitionTo('loginFail')
       return
-
-  validationState: ->
-    email = @state.email
-    unless email then return
-    if _.contains validUsers, email
-      @handleSubmit(email)
-      'success'
-    else
-      'error'
+    @transitionTo('emailPending')
 
   changeEmail: ->
     email = @refs.email.getValue()
@@ -39,7 +35,13 @@ module.exports = React.createClass
       email = email.split('.')[0]
     email = email.replace 'mica', ''
     email = email.replace 'edu', ''
-    @setState email: email
+    # Validate email.
+    if _.contains validUsers, email
+      @handleSubmit(email)
+    else
+      @setState
+        emailStatus: 'error'
+        email: email
 
   render: ->
     fieldset null,
@@ -49,7 +51,7 @@ module.exports = React.createClass
         placeholder: 'Enter MICA email'
         label: 'Your MICA email please'
         help: 'No need to include @mica.edu (e.g. if your email is kbjornard@mica.edu, you would just enter kbjornard)'
-        bsStyle: @validationState()
+        bsStyle: @state.emailStatus
         ref: 'email'
         hasFeedback: true
         groupClassName: 'group-class-customize-me'

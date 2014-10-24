@@ -1,7 +1,7 @@
 React = require 'react'
 domReady = require 'domready'
 Router = require 'react-router'
-{Routes, Route, DefaultRoute} = Router
+{Routes, Route, DefaultRoute, Redirect} = Router
 # _ = require 'lodash'
 
 # Models
@@ -11,7 +11,12 @@ Me = require './models/student'
 # Views
 App = require './views/app'
 StudentForm = require './views/student_form'
+
 Login = require './views/login'
+LoginOk = require './views/login/success'
+LoginPending = require './views/login/pending'
+LoginFail = require './views/login/fail'
+
 Imgs = require './views/img_form'
 ImgUpload = require './views/img_upload'
 
@@ -34,10 +39,25 @@ module.exports =
                 name: 'img'
                 handler: ImgUpload
                 kai: 'img'
-              DefaultRoute
-                name: 'login'
+              Route
                 handler: Login
-                kai: 'login'
+                name: 'login',
+              Route
+                name: 'checkEmail'
+                path: 'login/ok'
+                handler: LoginOk
+              Route
+                name: 'emailPending'
+                path: 'login/pending'
+                handler: LoginPending
+              Route
+                name: 'loginFail'
+                path: 'login/fail'
+                handler: LoginFail
+              Redirect
+                path: '/'
+                to: 'login'
+
     domReady ->
       React.renderComponent routes, document.body
 

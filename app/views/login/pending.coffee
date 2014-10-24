@@ -7,5 +7,4 @@ module.exports = React.createClass
   render: ->
     div null,
       p className: 'lead',
-        'Great! Please check your MICA email for a link to access the upload area.'
-      p 'The email is from ezle.io'
+        'One moment please... We are sending you an email.'
