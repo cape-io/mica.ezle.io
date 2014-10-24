@@ -1,0 +1,26 @@
+/*
+  This is the HTML that goes along with this CSS
+  <div id="logobg">
+    <canvas id="canvas" hidpi="on" style="background:transparent"></canvas>
+  </div>
+*/
+
+  #logobg {
+    display: block;
+    width: 300px;
+    height: 300px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px; /* half canvas width */
+    margin-top: -150px; /* half canvas height */
+  }
+
+  #canvas {
+    opacity: .5;
+    background-color: transparent !important;
+    margin: 0;
+    padding: 0;
+  }
+
