@@ -4,7 +4,7 @@ React = require 'react'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
-validUsers = require '../models/users'
+validUsers = require '../../models/users'
 
 # validUsers.forEach (id) ->
 #   validUsers.forEach (usr) ->
@@ -16,6 +16,23 @@ module.exports = React.createClass
   getInitialState: ->
     email: ''
     checkEmail: false
+
+  handleLogin: (usr, loggedIn) ->
+    if loggedIn
+      @transitionTo 'img'
+  statics:
+    willTransitionTo: (transition) ->
+      console.log 'transition'
+      if app.me.loggedIn
+        transition.redirect('img')
+
+  componentWillMount: ->
+    app.me.on 'change:loggedIn', @handleLogin
+    return
+
+  componentWillUnmount: ->
+    console.log 'unmount'
+    app.me.off 'change:loggedIn', @handleLogin
 
   handleSubmit: (email) ->
     app.me.email = email

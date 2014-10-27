@@ -6,23 +6,23 @@ props:
     label: MICA.edu email
     help: Please enter your MICA.edu email
     element: email
-    type: text
+    type: string
     required: true
     placeholder: '@mica.edu'
   studentid:
     element: false
-    type: text
+    type: string
     required: false
   # the rest of these are what will actually show up on their 'page'
   first_name:
     label: First Name
     element: text
-    type: text
+    type: string
     required: true
   last_name:
     element: text
     label: Last Name
-    type: text
+    type: string
     required: true
   program: # based on their program we should be able to match them to a show date
     label: Program
@@ -119,3 +119,4 @@ props:
     element: text
     label: Personal Email
     type: email
+  tempToken: 'string'

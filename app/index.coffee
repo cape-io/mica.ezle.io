@@ -13,9 +13,13 @@ App = require './views/app'
 StudentForm = require './views/student_form'
 
 Login = require './views/login'
+LoginForm = require './views/login/login'
 LoginOk = require './views/login/success'
 LoginPending = require './views/login/pending'
 LoginFail = require './views/login/fail'
+LoginToken = require './views/login/token'
+
+Mixer = require './views/mixer'
 
 Imgs = require './views/img_form'
 ImgUpload = require './views/img_upload'
@@ -23,6 +27,7 @@ ImgUpload = require './views/img_upload'
 module.exports =
   blastoff: ->
     self = window.app = @
+    # Route stuff attach
     @me = new Me()
     # Attach images collection to app global.
     @images = new Images()
@@ -40,26 +45,35 @@ module.exports =
                 handler: ImgUpload
                 kai: 'img'
               Route
+                name: 'mixer'
+                handler: Mixer,
+
+              Route
                 handler: Login
                 name: 'login',
-              Route
-                name: 'checkEmail'
-                path: 'login/ok'
-                handler: LoginOk
-              Route
-                name: 'emailPending'
-                path: 'login/pending'
-                handler: LoginPending
-              Route
-                name: 'loginFail'
-                path: 'login/fail'
-                handler: LoginFail
+                  DefaultRoute handler: LoginForm
+                  Route
+                    name: 'checkEmail'
+                    path: '/login/ok'
+                    handler: LoginOk
+                  Route
+                    name: 'emailPending'
+                    path: '/login/pending'
+                    handler: LoginPending
+                  Route
+                    name: 'loginFail'
+                    path: '/login/fail'
+                    handler: LoginFail
+                  Route
+                    name: 'loginToken'
+                    path: '/login/:uid/:tempToken'
+                    handler: LoginToken
               Redirect
                 path: '/'
                 to: 'login'
 
-    domReady ->
-      React.renderComponent routes, document.body
+    domReady =>
+      @.container = React.renderComponent routes, document.body
 
 # run it
 module.exports.blastoff()
