@@ -10,7 +10,6 @@ Me = require './models/student'
 
 # Views
 App = require './views/app'
-StudentForm = require './views/student_form'
 
 Login = require './views/login'
 LoginForm = require './views/login/login'
@@ -20,9 +19,12 @@ LoginFail = require './views/login/fail'
 LoginToken = require './views/login/token'
 
 Mixer = require './views/mixer'
+EditProfile = require './views/mixer/profile'
+EditImgs = require './views/mixer/image'
+EditEmbed = require './views/mixer/embed'
+EditEssay = require './views/mixer/essay'
 
 Imgs = require './views/img_form'
-ImgUpload = require './views/img_upload'
 
 module.exports =
   blastoff: ->
@@ -41,13 +43,25 @@ module.exports =
             kai: true
             handler: App,
               Route
-                name: 'img'
-                handler: ImgUpload
-                kai: 'img'
-              Route
                 name: 'mixer'
                 handler: Mixer,
-
+                  #DefaultRoute handler: EditProfile
+                  Route
+                    name: 'editProfile'
+                    path: '/mixer/profile'
+                    handler: EditProfile
+                  Route
+                    name: 'editImgs'
+                    path: '/mixer/images'
+                    handler: EditImgs
+                  Route
+                    name: 'editEmbed'
+                    path: '/mixer/embed'
+                    handler: EditEmbed
+                  Route
+                    name: 'editEssay'
+                    path: '/mixer/essay'
+                    handler: EditEssay
               Route
                 handler: Login
                 name: 'login',

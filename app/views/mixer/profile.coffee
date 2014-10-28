@@ -1,12 +1,12 @@
 React = require 'react'
-{div, h1, p, form, fieldset, img} = require 'reactionary'
+{div, h2, p, form, fieldset, img} = require 'reactionary'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
-data = require '../models/student.yaml'
-Text = require '../el/form/text'
-TextArea = require '../el/form/textarea'
-Select = require '../el/form/select'
+data = require '../../models/student.yaml'
+Text = require '../../el/form/text'
+TextArea = require '../../el/form/textarea'
+Select = require '../../el/form/select'
 
 module.exports = React.createClass
 
@@ -38,7 +38,7 @@ module.exports = React.createClass
 
     div
       className: 'artist-input',
-        h1 'Student Info'
+        h2 'Student Info'
         form
           className: 'form-horizontal',
             fieldset {},
@@ -47,6 +47,3 @@ module.exports = React.createClass
                   fields
                   Input
                     type: 'submit'
-                    onClick: (e) ->
-                      e.preventDefault()
-                      app.container.router.redirectTo('form/imgs')

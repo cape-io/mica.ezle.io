@@ -19,12 +19,12 @@ module.exports = React.createClass
 
   handleLogin: (usr, loggedIn) ->
     if loggedIn
-      @transitionTo 'img'
+      @transitionTo 'mixer'
   statics:
     willTransitionTo: (transition) ->
       console.log 'transition'
       if app.me.loggedIn
-        transition.redirect('img')
+        transition.redirect('mixer')
 
   componentWillMount: ->
     app.me.on 'change:loggedIn', @handleLogin

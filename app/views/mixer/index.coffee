@@ -7,22 +7,29 @@ module.exports = React.createClass
   #getInitialState: ->
   mixins: [Navigation]
   render: ->
-    #console.log RouteContext
     div
       className: 'row',
         h1 'Mixer'
         p
           className: 'lead',
             'MICA Grad Show 2015'
-        Navbar
-          NavItem
-            key: 'profile'
-            href: @makePath 'editProfile'
-          NavItem
-            key: 'image'
-            href: @makePath 'editImgs'
-          NavItem
-            key: 'embed'
-            href: @makePath 'editEmbed'
+        Navbar null,
+          Nav null,
+            NavItem
+              key: 'profile',
+              href: @makeHref('editProfile'),
+                'Profile'
+            NavItem
+              key: 'image'
+              href: @makeHref('editImgs'),
+                'Images'
+            NavItem
+              key: 'embed'
+              href: @makeHref('editEmbed'),
+                'Video/Audio/Etc.'
+            NavItem
+              key: 'essay'
+              href: @makeHref('editEssay'),
+                'Essay PDF'
 
         @props.activeRouteHandler(null)
