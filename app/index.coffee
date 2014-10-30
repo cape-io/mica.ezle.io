@@ -4,6 +4,9 @@ Router = require 'react-router'
 {Routes, Route, DefaultRoute, Redirect} = Router
 # _ = require 'lodash'
 
+# Data
+userData = require './data/users'
+
 # Models
 Images = require './models/images'
 Me = require './models/student'
@@ -24,7 +27,7 @@ EditImgs = require './views/mixer/image'
 EditEmbed = require './views/mixer/embed'
 EditEssay = require './views/mixer/essay'
 
-Imgs = require './views/img_form'
+#Imgs = require './views/img_form'
 
 module.exports =
   blastoff: ->
@@ -33,6 +36,7 @@ module.exports =
     @me = new Me()
     # Attach images collection to app global.
     @images = new Images()
+    @users = userData
     # Init the React application router.
     routes =
       Routes
@@ -48,7 +52,7 @@ module.exports =
                   #DefaultRoute handler: EditProfile
                   Route
                     name: 'editProfile'
-                    path: '/mixer/profile'
+                    path: '/mixer/profile/?:uid?'
                     handler: EditProfile
                   Route
                     name: 'editImgs'

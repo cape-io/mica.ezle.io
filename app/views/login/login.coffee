@@ -4,7 +4,7 @@ React = require 'react'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
-validUsers = require '../../models/users'
+validUsers = require '../../data/uids'
 
 # validUsers.forEach (id) ->
 #   validUsers.forEach (usr) ->
@@ -22,7 +22,6 @@ module.exports = React.createClass
       @transitionTo 'mixer'
   statics:
     willTransitionTo: (transition) ->
-      console.log 'transition'
       if app.me.loggedIn
         transition.redirect('mixer')
 
@@ -31,7 +30,6 @@ module.exports = React.createClass
     return
 
   componentWillUnmount: ->
-    console.log 'unmount'
     app.me.off 'change:loggedIn', @handleLogin
 
   handleSubmit: (email) ->

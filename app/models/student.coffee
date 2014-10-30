@@ -1,7 +1,7 @@
 Model = require("ampersand-model")
 r = require 'superagent'
 Cookies = require 'cookies-js'
-data = require './student.yaml'
+data = require '../data/studentSchema'
 
 props = data.props
 props.email.default = -> Cookies.get('email')
@@ -11,6 +11,7 @@ module.exports = Model.extend
   props: props
   fields: data.props
   session:
+    tempToken: 'string'
     emailSent: ['boolean', false, false]
     loggedIn: ['boolean', true, false]
     cookie:

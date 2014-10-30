@@ -20,6 +20,8 @@ zopfli = require 'gulp-zopfli'
 rename = require 'gulp-rename'
 runSequence = require 'run-sequence'
 
+API = 'http://mica.ezle.io.ld:8000/'
+#API = 'https://mica.ezle.io/'
 
 data = yaml.safeLoad fs.readFileSync('data.yaml', 'utf8')
 
@@ -42,7 +44,6 @@ gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy'], ->
   return
 
 gulp.task "templates", ->
-
   gulp.src("templates/*.jade")
     .pipe jade(locals: data)
     .pipe gulp.dest("./dev/")
@@ -72,15 +73,25 @@ gulp.task 'compile', ->
   return
 
 gulp.task 'updateUsers', (cb) ->
-  r 'https://mica.cape.io/9df66d7d/updateUsers.json', (err, resp, body) ->
+  r API+'9df66d7d/updateUsers.json', (err, resp, body) ->
     throw err if err
     console.log body
     cb()
 
-gulp.task 'data', ['updateUsers'], ->
-  r('http://mica.cape.io.ld:8000/9df66d7d/emails.json')
+gulp.task 'uids', ->
+  r(API+'uids.json')
+    .pipe source('uids.json')
+    .pipe gulp.dest('./app/data/')
+
+gulp.task 'userSchema', ->
+  r(API+'studentSchema.json')
+    .pipe source('studentSchema.json')
+    .pipe gulp.dest('./app/data/')
+
+gulp.task 'data', ['uids', 'userSchema'], ->
+  r(API+'users.json')
     .pipe source('users.json')
-    .pipe gulp.dest('./app/models/')
+    .pipe gulp.dest('./app/data/')
 
 # - - - - prod - - - -
 
