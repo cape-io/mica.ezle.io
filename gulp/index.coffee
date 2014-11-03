@@ -83,12 +83,12 @@ gulp.task 'uids', ->
     .pipe source('uids.json')
     .pipe gulp.dest('./app/data/')
 
-gulp.task 'userSchema', ->
+gulp.task 'studentSchema', ->
   r(API+'studentSchema.json')
     .pipe source('studentSchema.json')
     .pipe gulp.dest('./app/data/')
 
-gulp.task 'data', ['uids', 'userSchema'], ->
+gulp.task 'data', ['uids', 'studentSchema'], ->
   r(API+'users.json')
     .pipe source('users.json')
     .pipe gulp.dest('./app/data/')

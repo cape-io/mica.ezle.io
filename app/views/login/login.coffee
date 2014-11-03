@@ -33,7 +33,7 @@ module.exports = React.createClass
     app.me.off 'change:loggedIn', @handleLogin
 
   handleSubmit: (email) ->
-    app.me.email = email
+    app.me.uid = email
     app.me.requestToken (res) =>
       if res
         @transitionTo('checkEmail')

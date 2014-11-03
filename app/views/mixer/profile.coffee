@@ -10,6 +10,9 @@ Select = require '../el/form/select'
 
 module.exports = React.createClass
 
+  handleChange: (newSt) ->
+    @setState newSt
+
   render: ->
     if @props.params.uid
       user = _.find app.users, {uid: @props.params.uid}
@@ -26,7 +29,7 @@ module.exports = React.createClass
         div
           className: 'col-md-4 form-value',
             user.email
-    _.forEach data.props, (field, fieldId) ->
+    _.forEach data.props, (field, fieldId) =>
       if fieldId == 'mica_email' then return
       props =
         key: fieldId
@@ -37,6 +40,9 @@ module.exports = React.createClass
         fieldType: field.element
         options: field.options
         value: user[fieldId]
+        onChange: (e) =>
+          app.me[fieldId] = e.target.value
+          @handleChange fieldId: e.target.value
       if _.contains ['text', 'email'], field.element
         fields.push Text props
       else if field.element == 'select'

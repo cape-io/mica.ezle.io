@@ -6,11 +6,11 @@ module.exports = React.createClass
   # getInitialState: ->
   mixins: [Navigation]
   componentWillMount: ->
-    app.me.email = @props.params.uid
+    app.me.uid = @props.params.uid
     app.me.tempToken = @props.params.tempToken
     app.me.on 'change:loggedIn', (usr, loggedIn) =>
       if loggedIn
-        @transitionTo 'img'
+        @transitionTo 'mixer'
     app.me.on 'change:msgId', (usr, msgId) =>
       @transitionTo 'emailPending'
 
