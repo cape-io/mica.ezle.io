@@ -3,6 +3,8 @@ React = require 'react'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
+editableField = require './editableField'
+
 data = require '../../data/studentSchema'
 Text = require '../el/form/text'
 TextArea = require '../el/form/textarea'
@@ -20,15 +22,12 @@ module.exports = React.createClass
       user = app.me
 
     fields = []
-    fields.push div
-      key: 'mica-mail'
-      className: 'form-group',
-        div
-          className: 'col-md-4 text-right',
-            'MICA Email'
-        div
-          className: 'col-md-4 form-value',
-            user.email
+    fields.push editableField
+      id: 'email'
+      label: 'MICA Email'
+      editable: false
+      value: user.email
+
     _.forEach data.props, (field, fieldId) =>
       if fieldId == 'mica_email' then return
       props =
