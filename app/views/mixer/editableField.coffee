@@ -1,6 +1,10 @@
 React = require 'react/addons'
 cx = React.addons.classSet
-{div, ag} = require 'reactionary'
+{div, a, span} = require 'reactionary'
+_ = require 'lodash'
+md = require 'marked'
+
+EditField = require './editField'
 
 module.exports = React.createClass
 
@@ -9,10 +13,18 @@ module.exports = React.createClass
     fieldIsEditable = @props.editable != false
 
     # Assign value to fieldValue variable.
-    fieldValue = @props.value or 'Empty'
-    if fieldValue and @props.options and @props.options[fieldValue]
-      fieldValue = @props.options[fieldValue]
-
+    fieldValue = @props.value
+    if fieldValue
+      if @props.options
+        if val = _.find(@props.options, value: fieldValue)
+          fieldValue = val.name
+      if @props.element == 'textarea'
+        fieldValue = span
+          className: 'markdown'
+          dangerouslySetInnerHTML:
+            __html: md fieldValue
+    else
+      fieldValue = 'Empty'
     # Calculate classes for the value Element.
     buttonClasses = cx
       'col-md-4': true
@@ -27,12 +39,15 @@ module.exports = React.createClass
 
     # Value element.
     if fieldIsEditable
-      valueEl = a
-        role: 'button'
-        onClick: =>
-          @props.editField @props.id
-        className: buttonClasses,
-          fieldValue
+      if @props.editing
+        valueEl = EditField @props
+      else
+        valueEl = a
+          role: 'button'
+          onClick: =>
+            @props.editField @props.id
+          className: buttonClasses,
+            fieldValue
     else # Fixed value.
       valueEl = div
         className: buttonClasses,

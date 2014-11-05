@@ -5,7 +5,6 @@ module.exports = React.createClass
 
   propTypes:
     id: React.PropTypes.string.isRequired
-    label: React.PropTypes.string.isRequired
     options: React.PropTypes.array.isRequired
 
   render: ->
@@ -17,10 +16,6 @@ module.exports = React.createClass
           opt.name
     div
       className: 'form-group',
-        label
-          className: 'col-md-4 control-label'
-          htmlFor: @props.id,
-            @props.label
         div
           className: 'col-md-4',
             select
