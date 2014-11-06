@@ -1,5 +1,17 @@
 Model = require("ampersand-model")
 
+humanFileSize = (bytes, si) ->
+  thresh = 1024
+  if bytes < thresh
+    return value: bytes, unit: "B"
+  units = ["KiB", "MiB", "GiB"]
+  u = -1
+  loop
+    bytes /= thresh
+    ++u
+    break unless bytes >= thresh
+  return value: bytes.toFixed(1), unit: units[u]
+
 module.exports = Model.extend
   idAttribute: 'fileName'
   props:
@@ -11,7 +23,9 @@ module.exports = Model.extend
     lastModified: 'string'
   session:
     file: 'object'
-    progress: 'number'
+    progress:
+      type: 'number'
+      default: 0
     fileData: 'string'
 
   initialize: ->
@@ -33,9 +47,13 @@ module.exports = Model.extend
         else
           # Loading graphic.
           return '//media.giphy.com/media/hI6MSx3lJFWko/giphy.gif'
+    humanSize:
+      deps: ['bytes']
+      fn: ->
+        humanFileSize(@bytes)
 
   createSrcUrl: ->
-    '//mica2015.imgix.net'+app.uploadInfo.prefix+@fileName+'?w=400'
+    '//mica2015.imgix.net'+app.me.uploadInfo.prefix+@fileName+'?w=400'
 
   parse: (img) ->
     if img.file
@@ -81,7 +99,7 @@ module.exports = Model.extend
           console.log 'Error uploading file.'
 
     formData = new FormData()
-    up = app.uploadInfo
+    up = app.me.uploadInfo
     #formData.append('redirect', @state.redirect)
     formData.append('max_file_size', up.max_file_size)
     formData.append('max_file_count', up.max_file_count)

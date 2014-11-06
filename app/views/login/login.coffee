@@ -20,6 +20,7 @@ module.exports = React.createClass
   handleLogin: (usr, loggedIn) ->
     if loggedIn
       @transitionTo 'mixer'
+
   statics:
     willTransitionTo: (transition) ->
       if app.me.loggedIn

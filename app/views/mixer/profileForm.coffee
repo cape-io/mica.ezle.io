@@ -21,11 +21,7 @@ module.exports = React.createClass
     @setState editField: fieldId
 
   render: ->
-    if @props.params.uid
-      user = _.find app.users, {uid: @props.params.uid}
-    else
-      user = app.me
-
+    user = @props.user
     fields = []
     # Static email field.
     fields.push editableField

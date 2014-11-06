@@ -6,7 +6,24 @@ React = require 'react'
 module.exports = React.createClass
   #getInitialState: ->
   mixins: [Navigation]
+
+  handleLogin: (usr, loggedIn) ->
+    if loggedIn
+      @forceUpdate()
+
+  componentWillMount: ->
+    app.me.on 'change:loggedIn', @handleLogin
+    return
+
+  componentWillUnmount: ->
+    app.me.off 'change:loggedIn', @handleLogin
+
   render: ->
+    if @props.params.uid
+      user = _.find app.users, {uid: @props.params.uid}
+    else
+      user = app.me
+
     div
       className: 'row',
         h1 'Mixer'
@@ -32,4 +49,4 @@ module.exports = React.createClass
               href: @makeHref('editEssay'),
                 'Essay PDF'
 
-        @props.activeRouteHandler(null)
+        @props.activeRouteHandler(user: user)

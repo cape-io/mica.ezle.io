@@ -40,11 +40,11 @@ module.exports = Model.extend
     @on 'change:uid', (usr, uid) ->
       oldUid = Cookies.get 'uid'
       if uid != oldUid
-        console.log uid, 'set uid cookie'
+        #console.log uid, 'set uid cookie'
         Cookies.set('uid', uid)
     # If we find a uid and token in the cookies log the user in.
     if @uid and @token and not @loggedIn
-      console.log 'This user has token and uid in a cookie.'
+      #console.log 'This user has token and uid in a cookie.'
       @logIn()
     return
 
@@ -67,7 +67,7 @@ module.exports = Model.extend
       usr.tempToken = null
     else
       Cookies.expire('token')
-    console.log 'Parsed user.'
+    #console.log 'Parsed user.'
     return usr
 
   requestToken: (cb) ->
@@ -86,5 +86,5 @@ module.exports = Model.extend
 
   logIn: ->
     unless @loggedIn
-      console.log 'Log this user in!'
+      #console.log 'Log this user in!'
       @fetch()
