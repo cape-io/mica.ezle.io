@@ -3,30 +3,29 @@ React = require 'react'
 
 module.exports = React.createClass
   # getInitialState: ->
+  createImg: (id, url) ->
+    img
+      className: 'col-md-2 click'
+      key: id
+      src: url
+      onClick: ->
+        app.me.save pic: url
+      # width: '100'
+      # height: '100'
 
   render: ->
     model = @props.model
     pics = []
-    pics.push img
-      className: 'col-md-2'
-      key: 'gravatar'
-      src: 'https://www.gravatar.com/avatar/'+model.emailHash+'?d=retro&s=300'
-      width: '150'
+    pics.push @createImg('gravatar', 'https://www.gravatar.com/avatar/'+model.emailHash+'?d=retro&s=300')
+
     if model.twitter
-      pics.push img
-        className: 'col-md-2'
-        key: 'twitter'
-        src: 'https://avatars.io/twitter/'+model.twitter+'?size=large'
+      pics.push @createImg('twitter', 'https://avatars.io/twitter/'+model.twitter+'?size=large')
+
     if model.facebook
-      pics.push img
-        className: 'col-md-2'
-        key: 'facebook'
-        src: 'https://avatars.io/facebook/'+model.facebook+'?size=large'
+      pics.push @createImg('facebook', 'https://avatars.io/facebook/'+model.facebook+'?size=large')
+
     if model.instagram
-      pics.push img
-        className: 'col-md-2'
-        key: 'instagram'
-        src: 'https://avatars.io/instagram/'+model.instagram+'?size=large'
+      pics.push @createImg('instagram', 'https://avatars.io/instagram/'+model.instagram+'?size=large')
 
     div
       className: 'row',
