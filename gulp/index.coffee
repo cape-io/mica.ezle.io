@@ -61,7 +61,7 @@ gulp.task 'styles', ->
 
 gulp.task 'static', ->
   gulp.src('./static/**')
-    .pipe gulp.dest('./public/')
+    .pipe gulp.dest('./dev/')
 
 gulp.task 'compile', ->
   opts = watchify.args
