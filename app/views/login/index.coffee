@@ -1,5 +1,5 @@
 React = require 'react'
-{h1, div, p} = require 'reactionary'
+{h1, div, p, img} = require 'reactionary'
 {Navigation, CurrentPath} = require 'react-router'
 
 module.exports = React.createClass
@@ -9,6 +9,9 @@ module.exports = React.createClass
     #console.log RouteContext
     div
       className: 'row',
+        img
+          className: 'logo'
+          src: 'logo.png'
         div
           className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3',
             h1 'Login'
