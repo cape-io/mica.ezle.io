@@ -1,5 +1,5 @@
 React = require 'react'
-{h1, div, form, fieldset, p, a} = require 'reactionary'
+{h2, div, form, fieldset, p, a, img} = require 'reactionary'
 _ = require 'lodash'
 
 data = require '../../models/photo.yaml'
@@ -27,10 +27,14 @@ module.exports = React.createClass
         fieldEl = editableField props
         fields.push fieldEl
 
-    div null,
-      form
-        className: 'form-horizontal',
-          fieldset {},
-            fields
-      p className: 'lead text-info',
-        'Individual image update. ' + fileName
+    div
+      className: 'row',
+        div
+          className: 'col-md-6',
+            img
+              src: 'https://mica2015.imgix.net/'+app.me.uid+'/'+fileName+'?h=300'
+        form
+          className: 'form-horizontal col-md-6',
+            h2 'Image Details'
+            fieldset {},
+              fields
