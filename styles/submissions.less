@@ -29,12 +29,27 @@ img.logo {
   height: 30px;
 }
 
-.editable-empty {
+.editable-click {
   color: green;
+}
+
+.editable-click:hover {
+  color: darkgreen;
+  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+}
+
+.editable-empty {
+  color: rgba(244,154,193,1);
   font-style: italic;
   text-decoration: underline;
   text-decoration-line: underline;
   text-decoration-style: dashed;
+}
+
+.editable-empty:hover {
+  color: rgba(244,154,193,.66);
 }
 
 .profilepics.col-md-4 img {
@@ -48,4 +63,23 @@ img.logo {
   box-sizing: border-box;
 }
 
-.artist-input h2 { display: none; }
+select, textarea {
+  width: 333px;
+}
+
+#statement textarea {
+  height: 150px;
+  width: 333px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: forestgreen;
+  border-color: green;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: green;
+  border-color: darkgreen;
+}
