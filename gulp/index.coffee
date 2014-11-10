@@ -121,10 +121,10 @@ gulp.task 'prod_compile', (cb) ->
   bundler.transform coffeeify
   bundler.transform bd
   bundler.add('./app/index.coffee')
-  bundler.plugin 'minifyify',
-    map: 'script.map.json'
-    output: './prod/script.map.json'
-  bundler.bundle debug: true
+  # bundler.plugin 'minifyify',
+  #   map: 'script.map.json'
+  #   output: './prod/script.map.json'
+  bundler.bundle() #debug: true
     .pipe(source(global.sha+'.js'))
     .pipe(gulp.dest('./prod/'))
     .on('end', cb)
