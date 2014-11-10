@@ -33,14 +33,7 @@ module.exports = Model.extend
     email:
       deps: ['uid']
       fn: ->
-        if @uid == 'kai'
-          'kai@ezle.io'
-        else
-          @uid+'@mica.edu'
-    emailHash:
-      deps: ['email']
-      fn: ->
-        crypto.createHash('md5').update(@email).digest('hex')
+        @emailFromUid(@uid)
 
   initialize: ->
     @on 'change:tempToken', @logIn
@@ -55,6 +48,16 @@ module.exports = Model.extend
       @logIn()
     return
 
+  emailFromUid: (uid) ->
+    if uid == 'kai'
+      'kai@ezle.io'
+    else
+      uid+'@mica.edu'
+
+  gravatarUrl: (email) ->
+    hash = crypto.createHash('md5').update(email).digest('hex')
+    'https://www.gravatar.com/avatar/'+hash+'?d=retro&s=300'
+
   url: ->
     # If there is a tempToken, use it.
     if @tempToken
@@ -66,8 +69,8 @@ module.exports = Model.extend
       API+'user/'+@uid
 
   parse: (usr) ->
-    # if usr.email
-    #   usr.email = usr.email.split('@')[0]
+    if usr.uid and not usr.pic
+      usr.pic = @gravatarUrl(@emailFromUid(usr.uid))
     if usr.token and usr.tokenExpires
       Cookies.set('token', usr.token, expires: 15778463)
       usr.loggedIn = true

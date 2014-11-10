@@ -6,6 +6,8 @@ Text = require '../el/form/text'
 TextArea = require '../el/form/textarea'
 Select = require '../el/form/select'
 
+ProfileImg = require './profileImg'
+
 module.exports = React.createClass
 
   #mixins: [React.addons.LinkedStateMixin]
@@ -41,8 +43,16 @@ module.exports = React.createClass
     else if field.element == 'textarea'
       formFieldEl = textarea formFieldProps
 
+    if fieldId == 'pic'
+      extraEl = ProfileImg
+        model: @props.user
+        setValue: @setValue
+    else
+      extraEl = false
+
     div
       className: 'form-inline editableform',
+        extraEl
         div
           className: 'editable-input',
             formFieldEl

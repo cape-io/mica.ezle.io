@@ -2,14 +2,21 @@ React = require 'react'
 {div, img} = require 'reactionary'
 
 module.exports = React.createClass
-  # getInitialState: ->
+  getInitialState: ->
+    active: null
+
   createImg: (id, url) ->
+    imgClassName = 'col-md-2 click'
+    if @state.active == id
+      imgClassName += ' active'
     img
-      className: 'col-md-2 click'
+      className: imgClassName
       key: id
       src: url
-      onClick: ->
-        app.me.save pic: url
+      onClick: =>
+        @props.setValue url
+        @setState active: id
+        #app.me.save pic: url
       # width: '100'
       # height: '100'
 

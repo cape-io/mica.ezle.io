@@ -1,6 +1,6 @@
 React = require 'react/addons'
 cx = React.addons.classSet
-{div, a, span} = require 'reactionary'
+{div, a, span, img} = require 'reactionary'
 _ = require 'lodash'
 md = require 'marked'
 
@@ -23,6 +23,10 @@ module.exports = React.createClass
           className: 'markdown'
           dangerouslySetInnerHTML:
             __html: md fieldValue
+      if @props.id == 'pic'
+        fieldValue = img
+          src: fieldValue
+          alt: 'Profile Picture'
     else
       fieldValue = 'Empty'
     # Calculate classes for the value Element.
