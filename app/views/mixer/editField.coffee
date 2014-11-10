@@ -47,6 +47,7 @@ module.exports = React.createClass
       extraEl = ProfileImg
         model: @props.user
         setValue: @setValue
+        value: @state.value
     else
       extraEl = false
 
