@@ -97,7 +97,7 @@ gulp.task 'data', ['uids', 'studentSchema'], ->
 
 gulp.task 'set_sha', (cb) ->
   r_ops =
-    uri: 'https://api.github.com/repos/ookb/rg-client-app/branches/master'
+    uri: 'https://api.github.com/repos/OOKB/grad-show-2015/branches/master'
     json: true
     headers:
       'user-agent': 'request.js'
@@ -130,14 +130,6 @@ gulp.task 'prod_compile', (cb) ->
     .on('end', cb)
   return
 
-gulp.task 'prod_template', ->
-  # Templates
-  data.sha = global.sha
-
-  gulp.src("templates/*.jade")
-    .pipe jade(locals: data)
-    .pipe gulp.dest("./prod/")
-
 gulp.task 'copy_css', ['styles'], ->
   gulp.src('./dev/app.css')
     .pipe(rename(global.sha+'.css'))
@@ -148,13 +140,13 @@ gulp.task 'copy_css', ['styles'], ->
     .pipe gulp.dest('./prod/images/')
 
 gulp.task 'compress', ->
-  gulp.src("./prod/**")
+  gulp.src("./prod/*.{js,css,html,json}")
     .pipe(zopfli())
     .pipe(gulp.dest("./prod"))
 
 gulp.task 'prod', (cb) ->
   runSequence ['prod_clean', 'set_sha'],
-    ['prod_template', 'copy_css', 'prod_compile'],
+    ['copy_css', 'prod_compile'],
     'compress',
     cb
   return
