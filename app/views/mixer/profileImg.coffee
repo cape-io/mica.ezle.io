@@ -7,7 +7,7 @@ module.exports = React.createClass
 
   createImg: (id, url) ->
     imgClassName = 'col-md-2 click'
-    if @state.active == id
+    if @state.active == id or @props.model.pic == url
       imgClassName += ' active'
     img
       className: imgClassName
@@ -23,7 +23,7 @@ module.exports = React.createClass
   render: ->
     model = @props.model
     pics = []
-    pics.push @createImg('gravatar', 'https://www.gravatar.com/avatar/'+model.emailHash+'?d=retro&s=300')
+    pics.push @createImg('gravatar', model.gravatar)
 
     if model.twitter
       pics.push @createImg('twitter', 'https://avatars.io/twitter/'+model.twitter+'?size=large')
