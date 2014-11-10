@@ -8,7 +8,6 @@ module.exports = React.createClass
   render: ->
     div
       className: 'artist-input',
-        h2 'Student Info'
         form
           className: 'form-horizontal',
             fieldset {},
