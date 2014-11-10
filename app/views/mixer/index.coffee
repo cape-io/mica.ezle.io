@@ -1,6 +1,11 @@
 React = require 'react'
+<<<<<<< HEAD
 {h1, div, p, img} = require 'reactionary'
 {Navigation} = require 'react-router'
+=======
+{h1, div, li, p} = require 'reactionary'
+{Navigation, Link} = require 'react-router'
+>>>>>>> 342686285a048663aad2281f021a5998822cbded
 {Nav, Navbar, NavItem} = require 'react-bootstrap'
 
 module.exports = React.createClass
@@ -35,21 +40,25 @@ module.exports = React.createClass
             'MICA Grad Show 2015'
         Navbar null,
           Nav null,
-            NavItem
-              key: 'profile',
-              href: @makeHref('editProfile'),
-                'Profile'
-            NavItem
-              key: 'image'
-              href: @makeHref('editImgs'),
-                'Images'
-            NavItem
-              key: 'embed'
-              href: @makeHref('editEmbed'),
-                'Video/Audio/Etc.'
-            NavItem
-              key: 'essay'
-              href: @makeHref('editEssay'),
-                'Essay PDF'
+            li null,
+              Link
+                key: 'profile',
+                to: 'editProfile',
+                  'Profile'
+            li null,
+              Link
+                key: 'image'
+                to: 'editImgs',
+                  'Images'
+            li null,
+              Link
+                key: 'embed'
+                to: 'editEmbed',
+                  'Video/Audio/Etc.'
+            li null,
+              Link
+                key: 'essay'
+                to: 'editEssay',
+                  'Essay PDF'
 
         @props.activeRouteHandler(user: user)

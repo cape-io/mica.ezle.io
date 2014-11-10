@@ -34,6 +34,10 @@ module.exports = Model.extend
       deps: ['uid']
       fn: ->
         @emailFromUid(@uid)
+    gravatar:
+      deps: ['email']
+      fn: ->
+        @gravatarUrl(@email)
 
   initialize: ->
     @on 'change:tempToken', @logIn
