@@ -5,8 +5,8 @@ data = require '../data/studentSchema'
 
 Images = require './images'
 
-API = 'http://mica.ezle.io.ld:8000/'
-#API = 'https://mica.ezle.io/'
+#API = 'http://mica.ezle.io.ld:8000/'
+API = 'https://mica.ezle.io/'
 
 props = data.props
 props.uid.default = -> Cookies.get('uid')
