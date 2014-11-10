@@ -6,8 +6,8 @@ module.exports = React.createClass
     active: null
 
   createImg: (id, url) ->
-    imgClassName = 'click'
-    if @state.active == id
+    imgClassName = 'col-md-2 click'
+    if @state.active == id or @props.model.pic == url
       imgClassName += ' active'
     img
       className: imgClassName
