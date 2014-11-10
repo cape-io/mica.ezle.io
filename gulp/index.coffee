@@ -29,9 +29,10 @@ gulp.task "default", ['browser-sync'], ->
   gulp.watch "templates/*.jade", ["templates"]
   gulp.watch "styles/*.less", ["styles"]
   gulp.watch 'images/**', ['copy']
+  gulp.watch 'static/**', ['static']
   return
 
-gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy'], ->
+gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy', 'static'], ->
   browserSync.init "dev/**",
     server:
       baseDir: "dev" # Change this to your web root dir
@@ -57,6 +58,10 @@ gulp.task 'styles', ->
   gulp.src(["styles/app.less", 'styles/print.less', 'styles/iefix.less'])
     .pipe less(paths: [path.join(__dirname, "less", "includes")])
     .pipe gulp.dest("./dev")
+
+gulp.task 'static', ->
+  gulp.src('./static/**')
+    .pipe gulp.dest('./public/')
 
 gulp.task 'compile', ->
   opts = watchify.args
