@@ -139,6 +139,15 @@ gulp.task 'copy_css', ['styles'], ->
   gulp.src('./images/**')
     .pipe gulp.dest('./prod/images/')
 
+gulp.task 'prod_template', ->
+  # Templates
+  data.sha = global.sha
+
+  gulp.src("templates/*.jade")
+    .pipe jade(locals: data)
+    .pipe gulp.dest("./prod/")
+
+
 gulp.task 'compress', ->
   gulp.src("./prod/*.{js,css,html,json}")
     .pipe(zopfli())
@@ -146,7 +155,7 @@ gulp.task 'compress', ->
 
 gulp.task 'prod', (cb) ->
   runSequence ['prod_clean', 'set_sha'],
-    ['copy_css', 'prod_compile'],
+    ['prod_template', 'copy_css', 'prod_compile'],
     'compress',
     cb
   return
