@@ -24,6 +24,7 @@ LoginToken = require './views/login/token'
 Mixer = require './views/mixer'
 EditProfile = require './views/mixer/profile'
 EditImgs = require './views/mixer/image'
+EditImg = require './views/mixer/imageEdit'
 EditEmbed = require './views/mixer/embed'
 EditEssay = require './views/mixer/essay'
 
@@ -57,7 +58,11 @@ module.exports =
                   Route
                     name: 'editImgs'
                     path: '/mixer/images'
-                    handler: EditImgs
+                    handler: EditImgs,
+                      Route
+                        name: 'editImg'
+                        path: '/mixer/images/*'
+                        handler: EditImg
                   Route
                     name: 'editEmbed'
                     path: '/mixer/embed'

@@ -10,6 +10,7 @@ module.exports = React.createClass
   render: ->
     div
       className: 'images',
+        @props.activeRouteHandler(null)
         ImageUpload @props
         h2 'Uploaded Images'
         ImageUploads @props

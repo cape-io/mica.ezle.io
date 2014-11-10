@@ -6,18 +6,23 @@ cdn = 'https://mica2015.imgix.net/'
 module.exports = React.createClass
   getInitialState: ->
     progress: @props.model.progress
+    src: @props.model.src
 
   componentDidMount: ->
-    # app.images.on 'change:src', =>
-    #   @forceUpdate()
-    app.images.on 'change:progress', @handleProgress
+    @props.model.on 'change:src', @handleSrcChange
+    @props.model.on 'change:progress', @handleProgress
 
   componentWillUnmount: ->
-    app.images.off 'change:progress', @handleProgress
+    @props.model.off 'change:src', @handleSrcChange
+    @props.model.off 'change:progress', @handleProgress
 
   handleProgress: (model, progress) ->
     if progress % 5 == 0
       @setState progress: progress
+
+  handleSrcChange: (model, src) ->
+    if src != @state.src
+      @setState src: src
 
   render: ->
     console.log @props.model.fileName
@@ -32,8 +37,8 @@ module.exports = React.createClass
             # The image file.
             img
               alt: @props.model.fileName
-              src: @props.model.src
-              width: '170'
+              src: @state.src
+              width: '150'
             # Size of file. Shown below image.
             div
               className: 'dz-size',

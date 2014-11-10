@@ -3,6 +3,8 @@ r = require 'superagent'
 Cookies = require 'cookies-js'
 data = require '../data/studentSchema'
 
+Images = require './images'
+
 API = 'http://mica.ezle.io.ld:8000/'
 #API = 'https://mica.ezle.io/'
 
@@ -24,8 +26,8 @@ module.exports = Model.extend
     tokenExpires: 'string'
     msgId: 'string'
     uploadInfo: 'object'
-    files: 'array'
-
+  collections:
+    files: Images
   derived:
     email:
       deps: ['uid']
@@ -41,7 +43,7 @@ module.exports = Model.extend
       oldUid = Cookies.get 'uid'
       if uid != oldUid
         #console.log uid, 'set uid cookie'
-        Cookies.set('uid', uid)
+        Cookies.set('uid', uid, expires: 15778463)
     # If we find a uid and token in the cookies log the user in.
     if @uid and @token and not @loggedIn
       #console.log 'This user has token and uid in a cookie.'
@@ -67,6 +69,7 @@ module.exports = Model.extend
       usr.tempToken = null
     else
       Cookies.expire('token')
+      Cookies.expire('uid')
     #console.log 'Parsed user.'
     return usr
 

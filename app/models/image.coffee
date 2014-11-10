@@ -1,5 +1,7 @@
 Model = require("ampersand-model")
 
+CDN = '//mica2015.imgix.net/'
+
 humanFileSize = (bytes, si) ->
   thresh = 1024
   if bytes < thresh
@@ -47,13 +49,25 @@ module.exports = Model.extend
         else
           # Loading graphic.
           return '//media.giphy.com/media/hI6MSx3lJFWko/giphy.gif'
+
     humanSize:
       deps: ['bytes']
       fn: ->
         humanFileSize(@bytes)
 
-  createSrcUrl: ->
-    '//mica2015.imgix.net'+app.me.uploadInfo.prefix+@fileName+'?w=400'
+    thumbSrc:
+      deps: ['fileName']
+      fn: ->
+        CDN+@fileName+'?w=200&h=200&fit=crop'
+
+    editUrl:
+      deps: ['fileName']
+      fn: ->
+        '#/mixer/images'+@fileName.replace(app.me.uid, '')
+
+  # Used when uploading only.
+  createSrcUrl: () ->
+    '//mica2015.imgix.net'+app.me.uploadInfo.prefix+@fileName+'?w=200'
 
   parse: (img) ->
     if img.file

@@ -7,11 +7,10 @@ module.exports = React.createClass
   # getInitialState: ->
   render: ->
     user = @props.user
-    if user.files and user.files[0]
+    if user.files and user.files.length
       imageItems = []
       user.files.forEach (imageInfo) ->
-        imageInfo.key = imageInfo.fileName
-        imageItems.push Img(imageInfo)
+        imageItems.push Img(key: imageInfo.fileName, model: imageInfo)
     else
       imageItems = 'No images uploaded.'
     ul
