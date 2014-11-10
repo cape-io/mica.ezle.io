@@ -6,7 +6,7 @@ module.exports = React.createClass
     active: null
 
   createImg: (id, url) ->
-    imgClassName = 'col-md-2 click'
+    imgClassName = 'click'
     if @state.active == id
       imgClassName += ' active'
     img
@@ -35,5 +35,5 @@ module.exports = React.createClass
       pics.push @createImg('instagram', 'https://avatars.io/instagram/'+model.instagram+'?size=large')
 
     div
-      className: 'row',
+      className: 'profilepics col-md-4',
         pics
