@@ -10,6 +10,8 @@ Text = require '../el/form/text'
 TextArea = require '../el/form/textarea'
 Select = require '../el/form/select'
 
+ProfileImg = require './profileImg'
+
 module.exports = React.createClass
   getInitialState: ->
     editField: null
@@ -31,7 +33,9 @@ module.exports = React.createClass
       editable: false
       value: user.email
 
-    fieldIds = _.keys data.props
+    fields.push ProfileImg
+      key: 'profilePics'
+      model: user
 
     _.forEach data.props, (field, fieldId) =>
       if field.label

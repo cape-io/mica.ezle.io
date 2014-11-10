@@ -21,6 +21,8 @@ LoginPending = require './views/login/pending'
 LoginFail = require './views/login/fail'
 LoginToken = require './views/login/token'
 
+UsrImgs = require './views/usrImgs'
+
 Mixer = require './views/mixer'
 EditProfile = require './views/mixer/profile'
 EditImgs = require './views/mixer/image'
@@ -47,6 +49,9 @@ module.exports =
             path: '/'
             kai: true
             handler: App,
+              Route
+                name: 'usrImgs'
+                handler: UsrImgs
               Route
                 name: 'mixer'
                 handler: Mixer,

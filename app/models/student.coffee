@@ -1,12 +1,13 @@
 Model = require("ampersand-model")
+crypto = require 'crypto'
 r = require 'superagent'
 Cookies = require 'cookies-js'
 data = require '../data/studentSchema'
 
 Images = require './images'
 
-#API = 'http://mica.ezle.io.ld:8000/'
-API = 'https://mica.ezle.io/'
+API = 'http://mica.ezle.io.ld:8000/'
+#API = 'https://mica.ezle.io/'
 
 props = data.props
 props.uid.default = -> Cookies.get('uid')
@@ -36,6 +37,10 @@ module.exports = Model.extend
           'kai@ezle.io'
         else
           @uid+'@mica.edu'
+    emailHash:
+      deps: ['email']
+      fn: ->
+        crypto.createHash('md5').update(@email).digest('hex')
 
   initialize: ->
     @on 'change:tempToken', @logIn
