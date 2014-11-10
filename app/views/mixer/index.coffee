@@ -1,6 +1,6 @@
 React = require 'react'
-{h1, div, p, img} = require 'reactionary'
-{Navigation} = require 'react-router'
+{h1, div, p, img, li} = require 'reactionary'
+{Navigation, Link} = require 'react-router'
 {Nav, Navbar, NavItem} = require 'react-bootstrap'
 
 module.exports = React.createClass
