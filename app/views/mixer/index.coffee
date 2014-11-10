@@ -1,5 +1,5 @@
 React = require 'react'
-{h1, div, p} = require 'reactionary'
+{h1, div, p, img} = require 'reactionary'
 {Navigation} = require 'react-router'
 {Nav, Navbar, NavItem} = require 'react-bootstrap'
 
@@ -26,6 +26,9 @@ module.exports = React.createClass
 
     div
       className: 'row',
+        img
+          className: 'logo'
+          src: 'logo.png'
         h1 'Mixer'
         p
           className: 'lead',
