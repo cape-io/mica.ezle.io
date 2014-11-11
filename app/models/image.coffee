@@ -2,6 +2,8 @@ Model = require("ampersand-model")
 
 CDN = '//mica2015.imgix.net/'
 
+ImageMeta = require './imageMeta'
+
 humanFileSize = (bytes, si) ->
   thresh = 1024
   if bytes < thresh
@@ -16,6 +18,13 @@ humanFileSize = (bytes, si) ->
 
 module.exports = Model.extend
   idAttribute: 'fileName'
+  url: ->
+    app.api+'file/'+@fileName
+  initialize: ->
+    @on 'add', @processImgFile
+    @on 'change:src', ->
+      console.log 'has src'
+    return
   props:
     fileName: 'string'
     bytes: 'number'
@@ -29,13 +38,8 @@ module.exports = Model.extend
       type: 'number'
       default: 0
     fileData: 'string'
-
-  initialize: ->
-    @on 'add', @processImgFile
-    @on 'change:src', ->
-      console.log 'has src'
-    return
-
+  children:
+    metadata: ImageMeta
   derived:
     src:
       deps: ['fileData', 'uploaded']

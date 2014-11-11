@@ -22,6 +22,9 @@ module.exports = React.createClass
   editField: (fieldId) ->
     @setState editField: fieldId
 
+  handleFieldSubmit: (fieldId, value) ->
+    app.me.save fieldId, value
+
   render: ->
     user = @props.user
     fields = []
@@ -40,6 +43,7 @@ module.exports = React.createClass
         props.id = fieldId
         props.value = user[fieldId]
         props.editField = @editField
+        props.onSubmit = @handleFieldSubmit
         props.editing = @state.editField == fieldId
         props.user = user
         fieldEl = editableField props

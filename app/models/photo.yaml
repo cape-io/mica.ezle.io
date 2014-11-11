@@ -1,9 +1,4 @@
 props:
-  photo:
-    type: file
-    element: file
-    label: Image
-    accept: "image/jpg, image/jpeg"
   photo_cdn:
     type: url
   title:

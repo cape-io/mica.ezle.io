@@ -1,13 +1,12 @@
 Model = require("ampersand-model")
 crypto = require 'crypto'
+_ = require 'lodash'
+
 r = require 'superagent'
 Cookies = require 'cookies-js'
 data = require '../data/studentSchema'
 
 Images = require './images'
-
-API = 'http://mica.ezle.io.ld:8000/'
-#API = 'https://mica.ezle.io/'
 
 props = data.props
 props.uid.default = -> Cookies.get('uid')
@@ -65,12 +64,12 @@ module.exports = Model.extend
   url: ->
     # If there is a tempToken, use it.
     if @tempToken
-      API+'token/'+@uid+'/'+@tempToken
+      app.api+'token/'+@uid+'/'+@tempToken
     else if @token
       # This will return sig needed for file uploads.
-      API+'token/'+@uid+'/'+@token
+      app.api+'token/'+@uid+'/'+@token
     else
-      API+'user/'+@uid
+      app.api+'user/'+@uid
 
   parse: (usr) ->
     if usr.uid and not usr.pic
@@ -82,13 +81,17 @@ module.exports = Model.extend
     else
       Cookies.expire('token')
       Cookies.expire('uid')
+    if usr.files and usr.files.length
+      usr.files = _.map usr.files, (file) ->
+        file.metadata.id = file.fileName
+        file
     #console.log 'Parsed user.'
     return usr
 
   requestToken: (cb) ->
     if @uid
       console.log 'request'
-      r.post API+'sendtoken', {email: @uid}, (err, res) =>
+      r.post app.api+'sendtoken', {email: @uid}, (err, res) =>
         if res.body.msgId
           @emailSent = true
           cb(true)

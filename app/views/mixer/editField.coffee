@@ -64,11 +64,9 @@ module.exports = React.createClass
             button
               className: 'btn btn-primary btn-sm editable-submit'
               onClick: (e) =>
-                e.preventDefault()
-                newVal = {}
-                newVal[@props.id] = @state.value
-                app.me.save newVal
-                @props.editField null
+                e.preventDefault() # Prevent html form submit.
+                @props.onSubmit @props.id, @state.value # Save to model.
+                @props.editField null # Field isn't being edited.
               type: 'submit',
                 i
                   className: 'glyphicon glyphicon-ok'
