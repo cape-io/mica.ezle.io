@@ -76,3 +76,6 @@ module.exports = React.createClass
               type: 'button',
                 i
                   className: 'glyphicon glyphicon-remove'
+        span
+          className: 'help-block',
+            @props.help
