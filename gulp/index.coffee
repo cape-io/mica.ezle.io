@@ -119,7 +119,7 @@ gulp.task 'prod_clean', ->
 
 gulp.task 'prod_static', ->
   gulp.src('./static/**')
-    .pipe gulp.dest('./public/')
+    .pipe gulp.dest('./prod/')
 
 gulp.task 'prod_compile', (cb) ->
   # Javascript bundle
