@@ -35,8 +35,10 @@ EditEssay = require './views/mixer/essay'
 module.exports =
   blastoff: ->
     self = window.app = @
-    @api = 'http://mica.ezle.io.ld:8000/'
-    #@api = 'https://mica.ezle.io/'
+    if process.env.USER == 'kai'
+      @api = 'http://mica.ezle.io.ld:8000/'
+    else
+      @api = 'https://mica.ezle.io/'
     # Route stuff attach
     @me = new Me()
     # Attach images collection to app global.

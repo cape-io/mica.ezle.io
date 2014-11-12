@@ -33,7 +33,7 @@ module.exports = React.createClass
     d: size[2]
 
   render: ->
-    val = @state.value
+    val = SelectVal = @state.value
     optSelect =
       value: 'x'
       name: 'Select...'
@@ -55,15 +55,10 @@ module.exports = React.createClass
         value: opt.value,
           opt.name
 
-    selectField = select
-      value: val
-      onChange: @handleSizeType
-      type: 'select',
-        options
-
     selectOps = _.pluck(ops, 'value')
 
     if val and (val == 'fixed' or not _.contains selectOps, val)
+      SelectVal = 'fixed'
       sizeVals = @parseSize(val)
       sizeFields = form
         role: 'form',
@@ -106,6 +101,12 @@ module.exports = React.createClass
                       '"'
     else
       sizeFields = false
+
+    selectField = select
+      value: SelectVal
+      onChange: @handleSizeType
+      type: 'select',
+        options
 
     div
       className: 'size-field',
