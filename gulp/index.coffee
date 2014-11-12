@@ -117,6 +117,10 @@ gulp.task 'prod_clean', ->
   gulp.src('./prod', read: false)
     .pipe(clean())
 
+gulp.task 'prod_static', ->
+  gulp.src('./static/**')
+    .pipe gulp.dest('./public/')
+
 gulp.task 'prod_compile', (cb) ->
   # Javascript bundle
   opts =
@@ -160,7 +164,7 @@ gulp.task 'compress', ->
 
 gulp.task 'prod', (cb) ->
   runSequence ['prod_clean', 'set_sha'],
-    ['prod_template', 'copy_css', 'prod_compile'],
+    ['prod_static', 'prod_template', 'copy_css', 'prod_compile'],
     'compress',
     cb
   return
