@@ -12,6 +12,9 @@ module.exports = React.createClass
   getInitialState: ->
     editField: null
 
+  componentWillReceiveProps: (nextProps) ->
+    @setState editField: null
+
   getFileName: ->
     app.me.uid+'/'+@props.params.splat
 
