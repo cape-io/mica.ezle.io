@@ -5,7 +5,7 @@ _ = require 'lodash'
 Text = require '../el/form/text'
 TextArea = require '../el/form/textarea'
 Select = require '../el/form/select'
-
+SizeField = require './sizeField'
 ProfileImg = require './profileImg'
 
 module.exports = React.createClass
@@ -25,7 +25,7 @@ module.exports = React.createClass
     field = @props
     fieldId = field.id
     formFieldProps =
-      className: 'form-control input-sm'
+      className: 'form-control input-md'
       value: @state.value
       ref: 'fieldInput'
       id: fieldId
@@ -36,7 +36,9 @@ module.exports = React.createClass
       onChange: (e) =>
         @setValue e.target.value
 
-    if _.contains ['text', 'email'], field.element
+    if 'size' == fieldId
+      formFieldEl = SizeField formFieldProps
+    else if _.contains ['text', 'email'], field.element
       formFieldEl = input formFieldProps
     else if field.element == 'select'
       formFieldEl = Select formFieldProps

@@ -35,8 +35,8 @@ EditEssay = require './views/mixer/essay'
 module.exports =
   blastoff: ->
     self = window.app = @
-    #@api = 'http://mica.ezle.io.ld:8000/'
-    @api = 'https://mica.ezle.io/'
+    @api = 'http://mica.ezle.io.ld:8000/'
+    #@api = 'https://mica.ezle.io/'
     # Route stuff attach
     @me = new Me()
     # Attach images collection to app global.
@@ -57,7 +57,9 @@ module.exports =
               Route
                 name: 'mixer'
                 handler: Mixer,
-                  #DefaultRoute handler: EditProfile
+                  Redirect
+                    path: '/mixer'
+                    to: 'editProfile'
                   Route
                     name: 'editProfile'
                     path: '/mixer/profile/?:uid?'
