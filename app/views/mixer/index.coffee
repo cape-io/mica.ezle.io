@@ -1,11 +1,15 @@
 React = require 'react'
-{h1, div, p, img, li} = require 'reactionary'
+{h1, div, p, img, li, a} = require 'reactionary'
 {Navigation, Link} = require 'react-router'
 {Nav, Navbar, NavItem} = require 'react-bootstrap'
 
 module.exports = React.createClass
   #getInitialState: ->
   mixins: [Navigation]
+  statics:
+    willTransitionTo: (transition) ->
+      unless app.me.loggedIn
+        transition.redirect('login')
 
   handleLogin: (usr, loggedIn) ->
     if loggedIn
@@ -55,5 +59,12 @@ module.exports = React.createClass
                 key: 'essay'
                 to: 'editEssay',
                   'Essay PDF'
+            li null,
+              a
+                href: '#/'
+                onClick: ->
+                  app.logOut()
+                className: 'logout',
+                  'Logout'
 
         @props.activeRouteHandler(user: user)
