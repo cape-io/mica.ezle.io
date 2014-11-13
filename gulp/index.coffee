@@ -1,5 +1,6 @@
 path = require 'path'
 fs = require 'fs'
+exec = require('child_process').exec
 
 gulp = require 'gulp'
 r = require 'request'
@@ -44,11 +45,18 @@ gulp.task "browser-sync", ['compile', 'styles', 'templates', 'copy', 'static'], 
       location: true
   return
 
-gulp.task "templates", ->
-  gulp.src("templates/*.jade")
-    .pipe jade(locals: data)
-    .pipe gulp.dest("./dev/")
-  return
+gulp.task 'data', ->
+  gulp.src './content/**/*.yaml'
+    .pipe yaml()
+    .pipe gulp.dest('./app/data/')
+
+gulp.task 'content', ->
+  gulp.src './content/**/*.md'
+    .pipe markdown()
+    .pipe gulp.dest('./app/data/')
+
+gulp.task 'templates', ->
+  exec('coffee gulp/compile.coffee')
 
 gulp.task 'copy', ->
   gulp.src('./images/**')

@@ -108,3 +108,6 @@ module.exports = Model.extend
     unless @loggedIn
       #console.log 'Log this user in!'
       @fetch()
+
+  logOut: ->
+    Cookies.expire('token')
