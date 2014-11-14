@@ -1,5 +1,5 @@
 path = require 'path'
-fs = require 'fs'
+fs = require 'fs-extra'
 exec = require('child_process').exec
 
 gulp = require 'gulp'
@@ -116,13 +116,14 @@ gulp.task 'prod', (cb) ->
 
 gulp.task 'set_sha', (cb) ->
   r_ops =
-    uri: 'https://api.github.com/repos/cape/mica.ezle.io/branches/master'
+    uri: 'https://api.github.com/repos/cape-io/mica.ezle.io/branches/master'
     json: true
     headers:
       'user-agent': 'request.js'
   r r_ops, (err, response, body) ->
     if err then throw err
     global.sha = body.commit.sha
+    fs.outputJsonSync 'app/data/commit.json', body.commit
     cb()
   return
 

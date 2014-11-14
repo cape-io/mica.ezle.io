@@ -28,7 +28,8 @@
     "coffeeify": "^0.7.0",
     "js-yaml": "^3.2.1",
     "browserify-data": "^0.2.0",
-    "coffee-script": "^1.8.0"
+    "coffee-script": "^1.8.0",
+    "fs-extra": "^0.12.0"
   },
   "dependencies": {
     "react": "^0.11.1",
