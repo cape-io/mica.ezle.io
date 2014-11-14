@@ -23,7 +23,7 @@ module.exports = React.createClass
         link
           rel: 'stylesheet'
           type: 'text/css'
-          href: '/#{appFileName}.css'
+          href: "/#{appFileName}.css"
       body null,
         div
           id: 'react',
