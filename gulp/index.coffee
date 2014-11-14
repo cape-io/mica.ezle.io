@@ -4,7 +4,6 @@ exec = require('child_process').exec
 
 gulp = require 'gulp'
 r = require 'request'
-yaml = require 'js-yaml'
 
 browserSync = require 'browser-sync'
 
@@ -20,11 +19,11 @@ clean = require 'gulp-clean'
 zopfli = require 'gulp-zopfli'
 rename = require 'gulp-rename'
 runSequence = require 'run-sequence'
+markdown = require 'gulp-markdown-to-json'
+yaml = require 'gulp-yaml'
 
 API = 'http://mica.ezle.io.ld:8000/'
 #API = 'https://mica.ezle.io/'
-
-data = yaml.safeLoad fs.readFileSync('data.yaml', 'utf8')
 
 gulp.task "default", ['browser-sync'], ->
   gulp.watch "templates/*.jade", ["templates"]
@@ -101,16 +100,23 @@ gulp.task 'studentSchema', ->
     .pipe source('studentSchema.json')
     .pipe gulp.dest('./app/data/')
 
-gulp.task 'data', ['uids', 'studentSchema'], ->
+gulp.task 'serverData', ['uids', 'studentSchema'], ->
   r(API+'users.json')
     .pipe source('users.json')
     .pipe gulp.dest('./app/data/')
 
 # - - - - prod - - - -
 
+gulp.task 'prod', (cb) ->
+  runSequence ['prod_clean', 'set_sha'],
+    ['templates', 'prod_static', 'prod_template', 'copy_css', 'prod_compile'],
+    'compress',
+    cb
+  return
+
 gulp.task 'set_sha', (cb) ->
   r_ops =
-    uri: 'https://api.github.com/repos/OOKB/grad-show-2015/branches/master'
+    uri: 'https://api.github.com/repos/cape/mica.ezle.io/branches/master'
     json: true
     headers:
       'user-agent': 'request.js'
@@ -156,23 +162,8 @@ gulp.task 'copy_css', ['styles'], ->
   gulp.src('./images/**')
     .pipe gulp.dest('./prod/images/')
 
-gulp.task 'prod_template', ->
-  # Templates
-  data.sha = global.sha
-
-  gulp.src("templates/*.jade")
-    .pipe jade(locals: data)
-    .pipe gulp.dest("./prod/")
-
 
 gulp.task 'compress', ->
   gulp.src("./prod/*.{js,css,html,json}")
     .pipe(zopfli())
     .pipe(gulp.dest("./prod"))
-
-gulp.task 'prod', (cb) ->
-  runSequence ['prod_clean', 'set_sha'],
-    ['prod_static', 'prod_template', 'copy_css', 'prod_compile'],
-    'compress',
-    cb
-  return
