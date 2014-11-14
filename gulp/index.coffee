@@ -109,7 +109,7 @@ gulp.task 'serverData', ['uids', 'studentSchema'], ->
 
 gulp.task 'prod', (cb) ->
   runSequence ['prod_clean', 'set_sha'],
-    ['templatesProd', 'prod_static', 'prod_template', 'copy_css', 'prod_compile'],
+    ['templatesProd', 'prod_static', 'copy_css', 'prod_compile'],
     'compress',
     cb
   return
@@ -161,11 +161,8 @@ gulp.task 'copy_css', ['styles'], ->
   gulp.src('./dev/app.css')
     .pipe(rename(global.sha+'.css'))
     .pipe(gulp.dest('./prod'))
-  gulp.src('./dev/print.css', './dev/iefix.css')
+  gulp.src('./dev/print.css')
     .pipe(gulp.dest('./prod'))
-  gulp.src('./images/**')
-    .pipe gulp.dest('./prod/images/')
-
 
 gulp.task 'compress', ->
   gulp.src("./prod/*.{js,css,html,json}")
