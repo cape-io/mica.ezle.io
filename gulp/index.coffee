@@ -109,10 +109,13 @@ gulp.task 'serverData', ['uids', 'studentSchema'], ->
 
 gulp.task 'prod', (cb) ->
   runSequence ['prod_clean', 'set_sha'],
-    ['templates', 'prod_static', 'prod_template', 'copy_css', 'prod_compile'],
+    ['templatesProd', 'prod_static', 'prod_template', 'copy_css', 'prod_compile'],
     'compress',
     cb
   return
+
+gulp.task 'templatesProd', ->
+  exec('coffee gulp/compileProd.coffee')
 
 gulp.task 'set_sha', (cb) ->
   r_ops =

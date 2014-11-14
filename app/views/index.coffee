@@ -5,6 +5,7 @@ data = require '../data/data.json'
 
 module.exports = React.createClass
   render: ->
+    appFileName = @props.sha or 'app'
     html null,
       head null,
         title data.title
@@ -30,4 +31,4 @@ module.exports = React.createClass
               h1 data.title
         script
           type: 'text/javascript'
-          src: 'app.js'
+          src: "/#{appFileName}.js"
