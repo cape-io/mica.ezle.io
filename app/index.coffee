@@ -5,6 +5,7 @@ Router = require 'react-router'
 # _ = require 'lodash'
 
 # Data
+API = require './data/api.json'
 userData = require './data/users'
 
 # Models
@@ -35,10 +36,7 @@ EditEssay = require './views/mixer/essay'
 module.exports =
   blastoff: ->
     self = window.app = @
-    if process.env.USER == 'kai'
-      @api = 'http://mica.ezle.io.ld:8000/'
-    else
-      @api = 'https://mica.ezle.io/'
+    @api = API
     # Route stuff attach
     @me = new Me()
     # Attach images collection to app global.
