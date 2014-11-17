@@ -63,9 +63,9 @@ module.exports = React.createClass
       sizeFields = form
         role: 'form',
           div
-            className: 'row',
+            className: 'row dimensions',
               div
-                className: 'col-xs-2 form-control',
+                className: 'form-control height',
                   input
                     type: 'text'
                     className: 'form-control'
@@ -74,10 +74,13 @@ module.exports = React.createClass
                     onChange: @handleSizeChange
                     value: sizeVals.h
                   span
-                    className: "input-group-addon",
-                      '"'
+                    className: "input-group-addon plain",
+                      'in'
+                  span
+                    className: "input-group-addon plain bythis",
+                      '×'
               div
-                className: 'col-xs-2 form-control',
+                className: 'form-control width',
                   input
                     type: 'text'
                     className: 'form-control'
@@ -85,10 +88,14 @@ module.exports = React.createClass
                     ref: 'width'
                     onChange: @handleSizeChange
                     value: sizeVals.w
-                  span 'in.'
-
+                  span
+                    className: "input-group-addon plain",
+                      'in'
+                  span
+                    className: "input-group-addon plain bythis",
+                      '×'
               div
-                className: 'col-xs-2 form-control',
+                className: 'form-control depth',
                   input
                     type: 'text'
                     className: 'form-control'
@@ -97,8 +104,8 @@ module.exports = React.createClass
                     onChange: @handleSizeChange
                     value: sizeVals.d
                   span
-                    className: "input-group-addon",
-                      '"'
+                    className: "input-group-addon plain",
+                      'in '
     else
       sizeFields = false
 
