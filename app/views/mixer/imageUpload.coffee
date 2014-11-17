@@ -12,10 +12,12 @@ module.exports = React.createClass
   componentDidMount: ->
     # Every time an images changes its src update the view.
     app.me.files.on 'add', @handleFileUpload
+    app.me.files.on 'remove', @handleFileUpload
     app.me.files.on 'change:uploaded', @handleFileUpload
 
   componentWillUnmount: ->
     app.me.files.off 'add', @handleFileUpload
+    app.me.files.off 'remove', @handleFileUpload
     app.me.files.off 'change:uploaded', @handleFileUpload
 
   handleFileUpload: ->
@@ -41,11 +43,18 @@ module.exports = React.createClass
     # Process the files
     addFile = (file) ->
       fileName = app.me.uploadInfo.prefix.substr(1)+file.name
-      app.me.files.add
-        metadata: {id: fileName}
-        file: file
-        fileName: fileName,
-          parse: true
+      isImg = file.type == 'image/jpeg' or file.type == 'image/gif'
+      if isImg
+        app.me.files.add
+          metadata: {id: fileName}
+          file: file
+          fileName: fileName,
+            parse: true
+      else
+        console.log file.type
+        alert 'Please upload JPGs or GIFs, not this bloody
+          piece of '+file.type.split('/')[1].toUpperCase() + ' garbage.
+          Ask a friend if you need help.'
     addFile file for file in files
 
   activateFileSelect: ->

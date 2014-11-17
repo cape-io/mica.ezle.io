@@ -86,15 +86,22 @@ module.exports = Model.extend
 
   processImgFile: ->
     if @type and @file and @type.indexOf("image") is 0
-      if 3000000 > @bytes
-        reader = new FileReader()
-        reader.onload = (e) =>
-          @fileData = e.target.result
+      fileName = @fileName
+      reader = new FileReader()
+      reader.onload = (e) =>
+        img = new Image
+        img.onerror = (e) ->
+          alert('Hey art kid, you may only upload valid JPG and GIF image files!')
+          app.me.files.remove fileName
+        img.onload = =>
+          console.log img.width, img.height
+          if 3000000 > @bytes
+            @fileData = e.target.result
           @uploadFile()
-          return
-        reader.readAsDataURL @file
-      else
-        @uploadFile()
+        img.src = reader.result
+        return
+      reader.readAsDataURL @file
+
 
   handleFinish: (e) ->
     if xhr.readyState is 4
@@ -114,6 +121,8 @@ module.exports = Model.extend
           itemImg.onload = =>
             @uploaded = true
             console.log 'resized img'
+          itemImg.onerror = (e) ->
+            alert('There was an error processing your image. The image needs to be a JPG or GIF.')
           itemImg.src = @createSrcUrl()
         else
           console.log 'Error uploading file.'

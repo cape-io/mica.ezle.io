@@ -21,7 +21,11 @@ module.exports = React.createClass
     if user.files and user.files.length
       imageItems = []
       user.files.where(uploaded: true).forEach (imageInfo) ->
-        imageItems.push Img(key: imageInfo.fileName, model: imageInfo)
+        imageItems.push Img(
+          key: imageInfo.fileName
+          model: imageInfo
+          data: dragging: false
+        )
     else
       imageItems = 'No images uploaded.'
     ul
