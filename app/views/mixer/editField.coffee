@@ -13,7 +13,7 @@ module.exports = React.createClass
   #mixins: [React.addons.LinkedStateMixin]
 
   getInitialState: ->
-    value: @props.value
+    value: @props.value or @props.options[0].value
 
   componentDidMount: ->
     @refs.fieldInput.getDOMNode().focus()
