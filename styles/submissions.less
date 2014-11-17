@@ -83,3 +83,31 @@ select, textarea {
   background-color: green;
   border-color: darkgreen;
 }
+
+a.feedback {
+  position: fixed;
+  top: 20px;
+  left: 0;
+}
+
+.feedback button.btn.btn-info {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+a.feedback p {
+  text-decoration: none;
+  display: none;
+  position: absolute;
+  color: gray;
+  left: 0;
+  top: 0;
+  width: 300px;
+  z-index: -1;
+  background: white;
+  padding: 10px 10px 10px 100px;
+}
+
+a.feedback:hover p {
+  display: block;
+}
