@@ -45,7 +45,7 @@ module.exports = React.createClass
     addFile = (file) ->
       fileName = app.me.uploadInfo.prefix.substr(1)+file.name
       validImgTypes = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
-      isImg = _.contains validImgTypes file.type
+      isImg = _.contains validImgTypes, file.type
       if isImg
         app.me.files.add
           metadata: {id: fileName}
