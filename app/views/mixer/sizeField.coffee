@@ -65,7 +65,7 @@ module.exports = React.createClass
           div
             className: 'row dimensions',
               div
-                className: 'col-xs-2 form-control height',
+                className: 'form-control height',
                   input
                     type: 'text'
                     className: 'form-control'
@@ -75,12 +75,12 @@ module.exports = React.createClass
                     value: sizeVals.h
                   span
                     className: "input-group-addon plain",
-                      '"'
+                      'in'
                   span
                     className: "input-group-addon plain bythis",
                       '×'
               div
-                className: 'col-xs-2 form-control width',
+                className: 'form-control width',
                   input
                     type: 'text'
                     className: 'form-control'
@@ -90,12 +90,12 @@ module.exports = React.createClass
                     value: sizeVals.w
                   span
                     className: "input-group-addon plain",
-                      '"'
+                      'in'
                   span
                     className: "input-group-addon plain bythis",
                       '×'
               div
-                className: 'col-xs-2 form-control depth',
+                className: 'form-control depth',
                   input
                     type: 'text'
                     className: 'form-control'
@@ -105,7 +105,7 @@ module.exports = React.createClass
                     value: sizeVals.d
                   span
                     className: "input-group-addon plain",
-                      '"'
+                      'in '
     else
       sizeFields = false
 
