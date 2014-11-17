@@ -17,3 +17,6 @@ module.exports = React.createClass
             button
               className: 'btn btn-info',
                 'Feedback'
+            p
+              className: 'helptext',
+                'If you have a question, an issue uploading, or have noticed a bug, please report it here'
