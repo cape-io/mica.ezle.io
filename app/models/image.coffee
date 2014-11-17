@@ -91,7 +91,9 @@ module.exports = Model.extend
       reader.onload = (e) =>
         img = new Image
         img.onerror = (e) ->
-          alert('Hey art kid, you may only upload valid JPG and GIF image files!')
+          alert('Hey art kid, you may only upload valid JPG and GIF image files!
+            Changing the file extension does not change the file type.
+            Try again.')
           app.me.files.remove fileName
         img.onload = =>
           console.log img.width, img.height
@@ -122,7 +124,10 @@ module.exports = Model.extend
             @uploaded = true
             console.log 'resized img'
           itemImg.onerror = (e) ->
-            alert('There was an error processing your image. The image needs to be a JPG or GIF.')
+            alert('There was an error processing your image.
+              The image needs to be a JPG or GIF. You could refresh the page
+              and see if it shows up in your list. If it shows a broken image
+              delete the file and upload with correct file type.')
           itemImg.src = @createSrcUrl()
         else
           console.log 'Error uploading file.'
