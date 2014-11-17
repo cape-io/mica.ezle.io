@@ -73,7 +73,7 @@ module.exports = Model.extend
 
   # Used when uploading only.
   createSrcUrl: () ->
-    CDN+@fileName+'?w=200'
+    CDN+@fileName+'?w=200&h=200&fit=crop'
 
   parse: (img) ->
     if img.file
