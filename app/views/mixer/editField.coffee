@@ -68,7 +68,8 @@ module.exports = React.createClass
               onClick: (e) =>
                 e.preventDefault() # Prevent html form submit.
                 # Save to model.
-                @props.onSubmit @props.id, @refs.fieldInput.getDOMNode().value
+                val = @refs.fieldInput.getDOMNode().value or @state.value
+                @props.onSubmit @props.id, val
                 @props.editField null # Field isn't being edited.
               type: 'submit',
                 i
