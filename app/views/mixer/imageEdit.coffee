@@ -67,8 +67,17 @@ module.exports = React.createClass
             h2 'Image Details'
             fieldset {},
               fields
-              button
-                type: "button"
-                className: "btn btn-danger"
-                onClick: @handleDelete,
-                  'Delete'
+              div
+                className: 'btn-group'
+                role: 'group',
+                  button
+                    type: 'button'
+                    onClick: =>
+                      @transitionTo 'editImgs'
+                    className: 'btn btn-primary',
+                      'Done'
+                  button
+                    type: "button"
+                    className: "btn btn-danger"
+                    onClick: @handleDelete,
+                      'Delete'
