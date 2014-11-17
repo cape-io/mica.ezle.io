@@ -1,6 +1,7 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 {div, h2, a, small, input} = require 'reactionary'
+_ = require 'lodash'
 
 ImageUploading = require './imageUploading'
 
@@ -43,7 +44,8 @@ module.exports = React.createClass
     # Process the files
     addFile = (file) ->
       fileName = app.me.uploadInfo.prefix.substr(1)+file.name
-      isImg = file.type == 'image/jpeg' or file.type == 'image/gif'
+      validImgTypes = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
+      isImg = _.contains validImgTypes file.type
       if isImg
         app.me.files.add
           metadata: {id: fileName}
@@ -86,7 +88,7 @@ module.exports = React.createClass
       onDrop: @handleFileSelect
       onClick: @activateFileSelect
       id: 'filedrag',
-        h2 'Drop files ', small('to upload')
+        h2 'Drop JPG or GIF files ', small('to upload')
         a
           className: 'btn btn-primary btn-lg',
             'Or Click'
@@ -97,7 +99,7 @@ module.exports = React.createClass
           ref: 'fileselect'
           name: 'fileselect[]'
           multiple: 'multiple'
-          accept: 'image/jpg, image/jpeg'
+          accept: 'image/jpg, image/jpeg, image/gif, image/png'
           onChange: @handleFileSelect
           style:
             display: 'none'
