@@ -11,13 +11,15 @@ module.exports = React.createClass
 
   componentDidMount: ->
     # Every time an images changes its src update the view.
-    app.images.on 'add', @handleFileUpload
+    app.me.files.on 'add', @handleFileUpload
+    app.me.files.on 'change:uploaded', @handleFileUpload
 
   componentWillUnmount: ->
-    app.images.off 'add', @handleFileUpload
+    app.me.files.off 'add', @handleFileUpload
+    app.me.files.off 'change:uploaded', @handleFileUpload
 
   handleFileUpload: ->
-    @setState filesUploading: app.images.length
+    @setState filesUploading: app.me.files.where(uploaded: false).length
 
   # This is just to set the hover class.
   handleFileHover: (e) ->
@@ -38,9 +40,11 @@ module.exports = React.createClass
     files = e.target.files or e.dataTransfer.files
     # Process the files
     addFile = (file) ->
-      app.images.add
+      fileName = app.me.uploadInfo.prefix.substr(1)+file.name
+      app.me.files.add
+        metadata: {id: fileName}
         file: file
-        fileName: file.name,
+        fileName: fileName,
           parse: true
     addFile file for file in files
 
@@ -50,7 +54,7 @@ module.exports = React.createClass
   render: ->
     if @state.filesUploading
       files = []
-      app.images.forEach (imgUp) ->
+      app.me.files.where(uploaded: false).forEach (imgUp) ->
         #console.log imgUp.fileName
         files.push ImageUploading
           key: imgUp.fileName

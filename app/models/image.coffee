@@ -29,7 +29,9 @@ module.exports = Model.extend
     fileName: 'string'
     bytes: 'number'
     type: 'string'
-    uploaded: 'boolean'
+    uploaded:
+      type: 'boolean'
+      default: false
     md5: 'string'
     lastModified: 'string'
   session:
@@ -71,7 +73,7 @@ module.exports = Model.extend
 
   # Used when uploading only.
   createSrcUrl: () ->
-    '//mica2015.imgix.net'+app.me.uploadInfo.prefix+@fileName+'?w=200'
+    CDN+@fileName+'?w=200'
 
   parse: (img) ->
     if img.file
