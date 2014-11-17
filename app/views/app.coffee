@@ -11,6 +11,7 @@ module.exports = React.createClass
       className: 'container '+@getCurrentPath().substring(1).replace('/', '-'),
         @props.activeRouteHandler(null)
         a
+          className: 'feedback'
           target: '_blank'
           href: 'http://www.hipchat.com/g4oN9THPy',
             button

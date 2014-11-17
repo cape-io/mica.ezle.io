@@ -67,7 +67,8 @@ module.exports = React.createClass
               className: 'btn btn-primary btn-sm editable-submit'
               onClick: (e) =>
                 e.preventDefault() # Prevent html form submit.
-                @props.onSubmit @props.id, @state.value # Save to model.
+                # Save to model.
+                @props.onSubmit @props.id, @refs.fieldInput.getDOMNode().value
                 @props.editField null # Field isn't being edited.
               type: 'submit',
                 i
