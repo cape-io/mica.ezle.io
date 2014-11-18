@@ -5,8 +5,8 @@ _ = require 'lodash'
 Text = require '../el/form/text'
 TextArea = require '../el/form/textarea'
 Select = require '../el/form/select'
-SizeField = require './sizeField'
-ProfileImg = require './profileImg'
+SizeField = require './images/sizeField'
+ProfileImg = require './profile/profileImg'
 
 module.exports = React.createClass
 

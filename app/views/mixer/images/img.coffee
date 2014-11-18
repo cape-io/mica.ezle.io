@@ -1,15 +1,22 @@
-React = require 'react'
+React = require 'react/addons'
+cx = React.addons.classSet
 {li, a, img} = require 'reactionary'
+{Sortable} = require '../../../react-sortable'
 
 cdn = 'https://mica2015.imgix.net/'
 
 module.exports = React.createClass
   # getInitialState: ->
-
+  mixins: [Sortable]
   render: ->
+    liClasses = cx
+      'col-md-2': true
+      'dragable': true
+      'dragging': @isDragging()
+
     model = @props.model
     li
-      className: 'col-md-2',
+      className: liClasses,
         a
           href: model.editUrl,
             img

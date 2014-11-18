@@ -25,9 +25,9 @@ LoginToken = require './views/login/token'
 UsrImgs = require './views/usrImgs'
 
 Mixer = require './views/mixer'
-EditProfile = require './views/mixer/profile'
-EditImgs = require './views/mixer/image'
-EditImg = require './views/mixer/imageEdit'
+EditProfile = require './views/mixer/profile/profile'
+EditImgs = require './views/mixer/images/image'
+EditImg = require './views/mixer/images/imageEdit'
 EditEmbed = require './views/mixer/embed'
 EditEssay = require './views/mixer/essay'
 

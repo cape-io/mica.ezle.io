@@ -3,14 +3,9 @@ React = require 'react'
 Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
-editableField = require './editableField'
+editableField = require '../editableField'
 
-data = require '../../data/studentSchema'
-Text = require '../el/form/text'
-TextArea = require '../el/form/textarea'
-Select = require '../el/form/select'
-
-
+data = require '../../../data/studentSchema'
 
 module.exports = React.createClass
   getInitialState: ->
