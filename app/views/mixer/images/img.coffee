@@ -1,7 +1,7 @@
 React = require 'react/addons'
 cx = React.addons.classSet
 {li, a, img} = require 'reactionary'
-{Sortable} = require '../../../react-sortable'
+{Sortable} = require 'react-sortable'
 
 cdn = 'https://mica2015.imgix.net/'
 
