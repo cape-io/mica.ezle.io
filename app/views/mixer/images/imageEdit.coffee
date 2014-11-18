@@ -33,11 +33,16 @@ module.exports = React.createClass
     @getModel().save fieldId, value
     return
 
-  handleDelete: () ->
+  handleDelete: (e) ->
+    if e.preventDefault
+      e.preventDefault()
+    alert 'hi'
     fileName = @getFileName()
-    if confirm 'Are you sure you want to delete this image? It will be gone forever.'
-      app.me.files.get(fileName).destroy()
-      @transitionTo 'editImgs'
+    console.log fileName
+    #if confirm 'Are you sure you want to delete this image? It will be gone forever.'
+    #  console.log 'confirmed'
+      #app.me.files.get(fileName).destroy()
+      #@transitionTo 'editImgs'
     return
 
   render: ->

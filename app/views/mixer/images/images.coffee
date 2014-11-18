@@ -1,33 +1,39 @@
 React = require 'react'
 {ul, div} = require 'reactionary'
-
+_ = require 'lodash'
 Img = require './img'
 
+# List of uploaded images.
+
 module.exports = React.createClass
-  # getInitialState: ->
+  getInitialState: ->
+    items = @props.items
+    data:
+      items: items
+      dragging: undefined
 
-  componentDidMount: ->
-    app.me.files.on 'change:uploaded', @handleFileUpload
-
-  componentWillUnmount: ->
-    app.me.files.off 'change:uploaded', @handleFileUpload
-
-  handleFileUpload: ->
-    console.log 'uploaded another image.'
-    @setState filesUploaded: app.me.files.where(uploaded: false).length
+  handleSort: (items, dragging) ->
+    data = @state.data
+    data.items = items
+    data.dragging = dragging
+    if dragging == undefined
+      #console.log items
+      @props.handleSort items
+    @setState data: data
 
   render: ->
-    user = @props.user
-    if user.files and user.files.length
-      imageItems = []
-      user.files.where(uploaded: true).forEach (imageInfo) ->
-        imageItems.push Img(
-          key: imageInfo.fileName
-          model: imageInfo
-          data: dragging: false
-        )
-    else
-      imageItems = 'No images uploaded.'
+    items = @state.data.items
+    # @props.items.forEach (id) ->
+    #   unless _.contains items, id
+    #     items.push id
+    imageItems = items.map (id, i) =>
+      model = _.find @props.collection, {fileName: id}
+      Img
+        key: i
+        model: model
+        data: @state.data
+        sort: @handleSort
+
     ul
       className: 'row uploaded',
         imageItems

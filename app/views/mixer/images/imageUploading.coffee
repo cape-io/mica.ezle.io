@@ -25,7 +25,6 @@ module.exports = React.createClass
       @setState src: src
 
   render: ->
-    console.log @props.model.fileName
     div
       className: 'dz-preview dz-processing dz-image-preview col-md-2',
         div

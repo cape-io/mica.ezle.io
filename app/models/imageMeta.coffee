@@ -14,6 +14,9 @@ module.exports = Model.extend
       type: 'string'
     description:
       type: 'string'
+    sortOrder:
+      type: 'number'
+      default: 100
 
   url: ->
     app.api+'file/'+@id

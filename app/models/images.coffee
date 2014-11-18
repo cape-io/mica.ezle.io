@@ -5,6 +5,9 @@ module.exports = Collection.extend
   model: Model
   mainIndex: 'fileName'
   url: 'http://mica.cape.io.ld:8000/project/t/files.json'
+  comparator: (model) ->
+    model.metadata.sortOrder
+
   where: (attrs) ->
     if _.isEmpty attrs
       return []

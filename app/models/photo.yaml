@@ -27,6 +27,3 @@ props:
     type: number
   img_width:
     type: number
-  sort_order:
-    el: hidden
-    type: number
