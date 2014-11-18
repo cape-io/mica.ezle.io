@@ -16,5 +16,3 @@ module.exports = React.createClass
               className: 'img-thumbnail'
               src: model.thumbSrc
               alt: model.md5
-              width: '150'
-              height: '150'
