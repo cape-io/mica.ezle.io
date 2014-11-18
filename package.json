@@ -47,6 +47,7 @@
     "ampersand-rest-collection": "^2.0.3",
     "domready": "^1.0.7",
     "react-router": "^0.9.4",
+    "react-sortable": "https://github.com/prometheusresearch/react-sortable/archive/master.tar.gz",
     "gulp-markdown-to-json": "^0.2.1"
   }
 }
