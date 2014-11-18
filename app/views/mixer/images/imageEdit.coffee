@@ -38,6 +38,7 @@ module.exports = React.createClass
     if confirm 'Are you sure you want to delete this image? It will be gone forever.'
       app.me.files.get(fileName).destroy()
       @transitionTo 'editImgs'
+    return
 
   render: ->
     fileName = @getFileName()
