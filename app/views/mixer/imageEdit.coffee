@@ -57,13 +57,13 @@ module.exports = React.createClass
         fields.push fieldEl
 
     div
-      className: 'row',
+      className: 'row image-editor',
         div
-          className: 'col-md-6',
+          className: 'col-md-6 image-thumb',
             img
               src: 'https://mica2015.imgix.net/'+fileName+'?h=300'
         form
-          className: 'form-horizontal col-md-6',
+          className: 'form-horizontal col-md-6 image-fields',
             h2 'Image Details'
             fieldset {},
               fields
