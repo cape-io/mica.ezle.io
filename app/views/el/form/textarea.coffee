@@ -18,7 +18,7 @@ module.exports = React.createClass
     div
       className: 'form-group',
         div
-          className: 'col-md-4',
+          className: 'col-md-8',
             textarea
               className: 'form-control'
               id: @props.id

@@ -31,7 +31,7 @@ module.exports = React.createClass
       fieldValue = 'Empty'
     # Calculate classes for the value Element.
     buttonClasses = cx
-      'col-md-4': true
+      'col-md-8': true
       'form-value': true
       'editable-click': fieldIsEditable
       'required': @props.required
@@ -62,6 +62,6 @@ module.exports = React.createClass
       id: @props.id
       className: rowClasses,
         div
-          className: 'col-md-4 text-right',
+          className: 'col-md-2 text-right',
             @props.label
         valueEl

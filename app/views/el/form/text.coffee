@@ -13,11 +13,11 @@ module.exports = React.createClass
     div
       className: 'form-group',
         label
-          className: 'col-md-4 control-label'
+          className: 'col-md-2 control-label'
           htmlFor: @props.id,
             @props.label
         div
-          className: 'col-md-4',
+          className: 'col-md-8',
             input
               className: 'form-control'
               id: @props.id

@@ -63,7 +63,7 @@ module.exports = React.createClass
       sizeFields = form
         role: 'form',
           div
-            className: 'row dimensions',
+            className: 'dimensions',
               div
                 className: 'form-control height',
                   input
@@ -118,9 +118,8 @@ module.exports = React.createClass
     div
       className: 'size-field',
         div
-          className: 'col-md-8',
-            selectField
-            sizeFields
-            span
-              className: 'help-block',
-                @props.help
+          selectField
+          sizeFields
+          span
+            className: 'help-block',
+              @props.help
