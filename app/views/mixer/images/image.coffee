@@ -5,6 +5,8 @@ cx = React.addons.classSet
 ImageUpload = require './imageUpload'
 ImageUploads = require './images'
 
+# Images index view.
+
 module.exports = React.createClass
 
   render: ->
