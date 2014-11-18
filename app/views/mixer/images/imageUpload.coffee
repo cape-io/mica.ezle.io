@@ -54,9 +54,9 @@ module.exports = React.createClass
             parse: true
       else
         console.log file.type
-        alert 'Please upload JPGs or GIFs, not this bloody
-          piece of '+file.type.split('/')[1].toUpperCase() + ' garbage.
-          Ask a friend if you need help.'
+        alert 'Please upload JPGs or GIFs, not a '+ file.type.split('/')[1].toUpperCase() + '.
+          The system does not handle image files of this type. Please save this as a JPG from
+          the program you used to create this. Ask a friend if you need help.'
     addFile file for file in files
 
   activateFileSelect: ->
