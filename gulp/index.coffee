@@ -72,6 +72,7 @@ gulp.task 'static', ->
 
 gulp.task 'compile', ->
   opts = watchify.args
+  opts.debug = true
   opts.extensions = ['.coffee', '.json']
   w = watchify(browserify('./app/index.coffee', opts))
   w.transform coffeeify
