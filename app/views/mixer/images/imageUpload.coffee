@@ -41,8 +41,12 @@ module.exports = React.createClass
     @handleFileHover(e)
     # Fetch file list object.
     files = e.target.files or e.dataTransfer.files
+    maxFilesReached = false
     # Process the files
     addFile = (file) ->
+      if app.me.files.length > 24
+        maxFilesReached = true
+        return
       fileName = app.me.uploadInfo.prefix.substr(1)+file.name
       validImgTypes = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
       isImg = _.contains validImgTypes, file.type
@@ -57,7 +61,11 @@ module.exports = React.createClass
         alert 'Please upload JPGs or GIFs, not a '+ file.type.split('/')[1].toUpperCase() + '.
           The system does not handle image files of this type. Please save this as a JPG from
           the program you used to create this. Ask a friend if you need help.'
+      return
     addFile file for file in files
+    if maxFilesReached
+      alert 'You are limited to 25 images. Please delete some images before adding more.'
+    return
 
   activateFileSelect: ->
     @refs.fileselect.getDOMNode().click()
