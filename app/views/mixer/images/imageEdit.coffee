@@ -36,13 +36,12 @@ module.exports = React.createClass
   handleDelete: (e) ->
     if e.preventDefault
       e.preventDefault()
-    alert 'hi'
     fileName = @getFileName()
     console.log fileName
-    #if confirm 'Are you sure you want to delete this image? It will be gone forever.'
-    #  console.log 'confirmed'
-      #app.me.files.get(fileName).destroy()
-      #@transitionTo 'editImgs'
+    if confirm 'Are you sure you want to delete this image? It will be gone forever.'
+      console.log 'confirmed'
+      app.me.files.get(fileName).destroy()
+      @transitionTo 'editImgs'
     return
 
   render: ->

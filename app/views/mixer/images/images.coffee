@@ -7,31 +7,33 @@ Img = require './img'
 
 module.exports = React.createClass
   getInitialState: ->
-    items = @props.items
-    data:
-      items: items
-      dragging: undefined
+    items: @props.items
+    dragging: undefined
 
   handleSort: (items, dragging) ->
-    data = @state.data
-    data.items = items
-    data.dragging = dragging
     if dragging == undefined
       #console.log items
+      # Update the parent component that has access to the collection.
       @props.handleSort items
-    @setState data: data
+    # Always update the state of this component.
+    @setState
+      items: items
+      dragging: dragging
+
+  componentWillReceiveProps: (nextProps) ->
+    @setState
+      items: nextProps.items
 
   render: ->
-    items = @state.data.items
-    # @props.items.forEach (id) ->
-    #   unless _.contains items, id
-    #     items.push id
+    items = @state.items
     imageItems = items.map (id, i) =>
       model = _.find @props.collection, {fileName: id}
       Img
         key: i
         model: model
-        data: @state.data
+        data:
+          items: @state.items
+          dragging: @state.dragging
         sort: @handleSort
 
     ul

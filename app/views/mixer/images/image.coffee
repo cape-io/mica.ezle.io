@@ -34,13 +34,13 @@ module.exports = React.createClass
 
   componentDidMount: ->
     app.me.files.on 'change:uploaded', @handleFileUpload
-    app.me.files.on 'remove', @handleFileUpload
+    app.me.files.on 'destroy', @handleFileUpload
     # app.me.files.on 'all', (a, b, c) ->
     #   console.log a, b, c
 
   componentWillUnmount: ->
     app.me.files.off 'change:uploaded', @handleFileUpload
-    app.me.files.off 'remove', @handleFileUpload
+    app.me.files.off 'destroy', @handleFileUpload
 
   handleFileUpload: ->
     st = @getItems()
