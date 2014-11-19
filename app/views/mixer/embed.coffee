@@ -30,6 +30,7 @@ module.exports = React.createClass
       app.me.embeds.add
         id: fieldId
         uri: value
+      app.me.save()
     return
 
   componentDidMount: ->
