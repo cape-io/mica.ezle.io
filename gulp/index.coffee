@@ -22,8 +22,8 @@ runSequence = require 'run-sequence'
 markdown = require 'gulp-markdown-to-json'
 yaml = require 'gulp-yaml'
 
-API = 'http://mica.ezle.io.ld:8000/'
-#API = 'https://mica.ezle.io/'
+#API = 'http://mica.ezle.io.ld:8000/'
+API = 'https://mica.ezle.io/'
 
 gulp.task "default", ['browser-sync'], ->
   gulp.watch "templates/*.jade", ["templates"]

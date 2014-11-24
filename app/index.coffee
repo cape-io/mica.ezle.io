@@ -6,7 +6,6 @@ Router = require 'react-router'
 
 # Data
 API = require './data/api.json'
-userData = require './data/users'
 
 # Models
 Images = require './models/images'
@@ -41,7 +40,6 @@ module.exports =
     @me = new Me()
     # Attach images collection to app global.
     @images = new Images()
-    @users = userData
     # Init the React application router.
     routes =
       Routes
@@ -108,4 +106,6 @@ module.exports =
       @.container = React.renderComponent routes, document.body
 
 # run it
+console.profile()
 module.exports.blastoff()
+console.profileEnd()

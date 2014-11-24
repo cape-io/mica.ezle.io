@@ -22,6 +22,8 @@ module.exports = React.createClass
     @refs.fieldInput.getDOMNode().focus()
 
   setValue: (newVal) ->
+    if @props.id == 'twitter'
+      newVal = newVal.replace('@', '')
     @setState value: newVal
 
   render: ->

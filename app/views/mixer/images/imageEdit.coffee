@@ -55,6 +55,7 @@ module.exports = React.createClass
         props.key = fieldId
         props.id = fieldId
         props.value = model[fieldId]
+        props.model = model
         props.editField = @editField
         props.onSubmit = @handleFieldSubmit
         props.editing = @state.editField == fieldId

@@ -27,6 +27,8 @@ module.exports = React.createClass
         fieldValue = img
           src: fieldValue
           alt: 'Profile Picture'
+      else if @props.id == 'size'
+        fieldValue = @props.model.sizeDisplay
     else
       fieldValue = 'Empty'
     # Calculate classes for the value Element.
