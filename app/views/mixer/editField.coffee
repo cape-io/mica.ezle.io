@@ -13,7 +13,7 @@ module.exports = React.createClass
   #mixins: [React.addons.LinkedStateMixin]
 
   getInitialState: ->
-    if @props.ooptions and @props.options[0].value
+    if @props.options and @props.options[0].value
       value: @props.value or @props.options[0].value
     else
       value: @props.value
