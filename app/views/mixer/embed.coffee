@@ -5,7 +5,7 @@ editableField = require './editableField'
 
 module.exports = React.createClass
   getInitialState: ->
-    fieldQty: 1
+    fieldQty: app.me.embeds.length or 1
     editField: null
 
   addField: (e) ->
