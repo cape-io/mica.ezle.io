@@ -62,8 +62,9 @@ module.exports = React.createClass
             li null,
               a
                 href: '#/'
-                onClick: ->
+                onClick: =>
                   app.logOut()
+                  @transitionTo 'login'
                 className: 'logout',
                   'Logout'
 

@@ -40,6 +40,9 @@ module.exports =
     @me = new Me()
     # Attach images collection to app global.
     @images = new Images()
+    @logOut = =>
+      @me.logOut()
+      @me = new Me()
     # Init the React application router.
     routes =
       Routes
@@ -106,6 +109,6 @@ module.exports =
       @.container = React.renderComponent routes, document.body
 
 # run it
-console.profile()
+#console.profile()
 module.exports.blastoff()
-console.profileEnd()
+#console.profileEnd()
