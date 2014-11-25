@@ -1,6 +1,6 @@
 React = require 'react/addons'
 cx = React.addons.classSet
-{div, h2} = require 'reactionary'
+{div, h2, small} = require 'reactionary'
 
 _ = require 'lodash'
 
@@ -67,5 +67,5 @@ module.exports = React.createClass
       className: 'images',
         @props.activeRouteHandler(null)
         ImageUpload @props
-        h2 'Uploaded Images'
+        h2 'Uploaded Images ', small('Click to edit')
         uploadedImgs
