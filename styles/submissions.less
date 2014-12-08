@@ -115,3 +115,28 @@ a.feedback p {
 a.feedback:hover p {
   display: block;
 }
+
+/*** profile picture ***/
+
+.student-input .dropzone {
+  margin-left: 16.666667%;
+  padding: 5px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.student-input .dropzone span {
+  display: block;
+  margin: 5px 0;
+}
+
+.student-input .dropzone::before {
+  content: 'Profile Picture';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -16.6667%;
+  text-align: right;
+  width: calc(16.66667% - 30px);
+}
+
