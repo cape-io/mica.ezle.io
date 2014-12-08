@@ -15,7 +15,10 @@ module.exports = Collection.extend
       # Check for each value one at a time.
       match = true
       _.each attrs, (val, key) ->
-        value = if model.get then model.get(key) else model[key]
+        if 'profilePic' == key
+          value = model['metadata'][key]
+        else
+          value = if model.get then model.get(key) else model[key]
         if value != val
           match = false
           return false

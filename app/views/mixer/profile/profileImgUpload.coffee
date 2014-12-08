@@ -1,9 +1,9 @@
 React = require 'react/addons'
 cx = React.addons.classSet
-{div, h2, a, small, input} = require 'reactionary'
+{div, h2, a, small, input, img, p} = require 'reactionary'
 _ = require 'lodash'
 
-ImageUploading = require './imageUploading'
+ImageUploading = require '../images/imageUploading'
 
 module.exports = React.createClass
   getInitialState: ->
@@ -13,13 +13,13 @@ module.exports = React.createClass
   componentDidMount: ->
     # Every time an images changes its src update the view.
     app.me.files.on 'add', @handleFileUpload
-    app.me.files.on 'remove', @handleFileUpload
-    app.me.files.on 'change:uploaded', @handleFileUpload
+    #app.me.files.on 'change:uploaded', @handleFileUpload
+    app.me.on 'change:pic', @handleFileUpload
 
   componentWillUnmount: ->
     app.me.files.off 'add', @handleFileUpload
-    app.me.files.off 'remove', @handleFileUpload
-    app.me.files.off 'change:uploaded', @handleFileUpload
+    #app.me.files.off 'change:uploaded', @handleFileUpload
+    app.me.on 'change:pic', @handleFileUpload
 
   handleFileUpload: ->
     @setState filesUploading: app.me.files.where(uploaded: false).length
@@ -38,6 +38,9 @@ module.exports = React.createClass
 
   # Drop or Select
   handleFileSelect: (e) ->
+    # Delete current profile image.
+    if app.me.picFileName
+      app.me.files.get(app.me.picFileName).destroy()
     # Disable defaults. Toggle off 'hover' class.
     @handleFileHover(e)
     # Fetch file list object.
@@ -45,15 +48,12 @@ module.exports = React.createClass
     maxFilesReached = false
     # Process the files
     addFile = (file) ->
-      if app.me.files.length > 24
-        maxFilesReached = true
-        return
       fileName = app.me.uploadInfo.prefix.substr(1)+file.name
-      validImgTypes = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
+      validImgTypes = ['image/jpg', 'image/jpeg']
       isImg = _.contains validImgTypes, file.type
       if isImg
         app.me.files.add
-          metadata: {id: fileName}
+          metadata: {id: fileName, profilePic: true, title: 'Profile Picture'}
           file: file
           fileName: fileName,
             parse: true
@@ -63,7 +63,7 @@ module.exports = React.createClass
           The system does not handle image files of this type. Please save this as a JPG from
           the program you used to create this. Ask a friend if you need help.'
       return
-    addFile file for file in files
+    addFile files[0]
     if maxFilesReached
       alert 'You are limited to 25 images. Please delete some images before adding more.'
     return
@@ -73,6 +73,7 @@ module.exports = React.createClass
 
   render: ->
     if @state.filesUploading
+      console.log 'files uploading now. show them.'
       files = []
       app.me.files.where(uploaded: false).forEach (imgUp) ->
         #console.log imgUp.fileName
@@ -88,7 +89,7 @@ module.exports = React.createClass
       className: cx(
         hover: @state.fileHover
         'alert-info': @state.fileHover
-        jumbotron: true
+        #jumbotron: true
         dropzone: true
       )
       ref: 'filedrag'
@@ -97,18 +98,17 @@ module.exports = React.createClass
       onDrop: @handleFileSelect
       onClick: @activateFileSelect
       id: 'filedrag',
-        h2 'Drop JPG or GIF files ', small('to upload')
-        a
-          className: 'btn btn-primary btn-lg',
-            'Or Click'
-        files
+        if files then files else img
+          src: app.me.pic
+          alt: 'Profile Picture'
+        p
+          'Click on the image or drop a new JPG on top of it to replace it.'
         input
           type: 'file'
           id: 'fileselect'
           ref: 'fileselect'
-          name: 'fileselect[]'
-          multiple: 'multiple'
-          accept: 'image/jpg, image/jpeg, image/gif, image/png'
+          name: 'fileselect'
+          accept: 'image/jpg, image/jpeg'
           onChange: @handleFileSelect
           style:
             display: 'none'

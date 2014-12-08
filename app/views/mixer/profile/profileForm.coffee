@@ -5,7 +5,11 @@ _ = require 'lodash'
 
 editableField = require '../editableField'
 
+profilePic = require './profileImgUpload'
+
 data = require '../../../data/studentSchema'
+profileFields = data.props
+delete profileFields.pic
 
 module.exports = React.createClass
   getInitialState: ->
@@ -31,7 +35,7 @@ module.exports = React.createClass
       editable: false
       value: user.email
 
-    _.forEach data.props, (field, fieldId) =>
+    _.forEach profileFields, (field, fieldId) =>
       if field.label
         props = field
         props.key = fieldId
@@ -46,4 +50,5 @@ module.exports = React.createClass
 
     div
       className: 'student-input',
+        profilePic()
         fields

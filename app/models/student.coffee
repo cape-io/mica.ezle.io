@@ -11,6 +11,7 @@ Embeds = require './embeds'
 
 props = data.props
 props.uid.default = -> Cookies.get('uid')
+props.picFileName = {type: 'string'}
 
 module.exports = Model.extend
   idAttribute: 'uid'
