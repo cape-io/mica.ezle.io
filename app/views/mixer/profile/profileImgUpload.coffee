@@ -22,7 +22,10 @@ module.exports = React.createClass
     app.me.on 'change:pic', @handleFileUpload
 
   handleFileUpload: ->
-    @setState filesUploading: app.me.files.where(uploaded: false).length
+    if @isMounted()
+      @setState filesUploading: app.me.files.where(uploaded: false).length
+    log
+      console.log 'not mounted. wtf error.'
 
   # This is just to set the hover class.
   handleFileHover: (e) ->
