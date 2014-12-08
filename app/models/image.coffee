@@ -74,7 +74,7 @@ module.exports = Model.extend
   # Used when uploading only.
   createSrcUrl: () ->
     if @metadata.profilePic
-      CDN+@fileName+'?w=300'
+      CDN+@fileName+'?w=300&h=225&fit=crop&crop=faces&mono=F67FC5'
     else
       CDN+@fileName+'?w=200&h=200&fit=crop'
 
