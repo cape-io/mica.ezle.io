@@ -73,7 +73,10 @@ module.exports = Model.extend
 
   # Used when uploading only.
   createSrcUrl: () ->
-    CDN+@fileName+'?w=200&h=200&fit=crop'
+    if @metadata.profilePic
+      CDN+@fileName+'?w=300'
+    else
+      CDN+@fileName+'?w=200&h=200&fit=crop'
 
   parse: (img) ->
     if img.file
@@ -97,6 +100,8 @@ module.exports = Model.extend
           app.me.files.remove fileName
         img.onload = =>
           console.log img.width, img.height
+          @metadata.width = img.width
+          @metadata.height = img.height
           if 3000000 > @bytes
             @fileData = e.target.result
           @uploadFile()
@@ -123,6 +128,11 @@ module.exports = Model.extend
           itemImg.onload = =>
             @uploaded = true
             console.log 'resized img'
+            @save()
+            if @metadata.profilePic == true
+              @collection.parent.pic = itemImg.src
+              @collection.parent.picFileName = @fileName
+              @collection.parent.save()
           itemImg.onerror = (e) ->
             alert('There was an error processing your image.
               The image needs to be a JPG or GIF. You could refresh the page

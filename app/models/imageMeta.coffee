@@ -19,6 +19,13 @@ module.exports = Model.extend
     sortOrder:
       type: 'number'
       default: 100
+    profilePic:
+      type: 'boolean'
+      default: false
+    height:
+      type: 'number'
+    width:
+      type: 'number'
   derived:
     sizeDisplay:
       deps: ['size']

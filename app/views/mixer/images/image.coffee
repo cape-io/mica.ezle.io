@@ -23,8 +23,8 @@ module.exports = React.createClass
     user = @props.user
     if user.files and user.files.length
       @collections =
-        uploaded: user.files.where(uploaded: true)
-        uploading: user.files.where(uploaded: false)
+        uploaded: user.files.where(uploaded: true, profilePic: false)
+        uploading: user.files.where(uploaded: false, profilePic: false)
     else
       @collections =
         uploaded: []
