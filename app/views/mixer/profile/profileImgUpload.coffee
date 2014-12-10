@@ -107,7 +107,7 @@ module.exports = React.createClass
           src: app.me.pic
           alt: 'Profile Picture'
         p
-          'Click on the image or drop a new JPG on top of it to replace it.'
+          'Click on the image or drop a new JPG on top of it to replace it. NOTE: The site has been designed so that all profile images have the same color filter applied to them. They will also be resized and cropped if necessary.'
         input
           type: 'file'
           id: 'fileselect'
