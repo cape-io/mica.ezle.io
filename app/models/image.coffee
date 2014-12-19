@@ -130,9 +130,16 @@ module.exports = Model.extend
             console.log 'resized img'
             @save()
             if @metadata.profilePic == true
-              @collection.parent.pic = itemImg.src
-              @collection.parent.picFileName = @fileName
-              @collection.parent.save()
+              me = @collection.parent
+              # Delete old profile image.
+              if me.picFileName
+                picModel = @collection.get(me.picFileName)
+                if picModel then picModel.destroy()
+              # Save new file info to profile.
+              me.pic = itemImg.src
+              me.picFileName = @fileName
+              me.save()
+
           itemImg.onerror = (e) ->
             alert('There was an error processing your image.
               The image needs to be a JPG or GIF. You could refresh the page

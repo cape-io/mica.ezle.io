@@ -43,10 +43,6 @@ module.exports = React.createClass
   handleFileSelect: (e) ->
     # Disable defaults. Toggle off 'hover' class.
     @handleFileHover(e)
-    # Delete current profile image.
-    if app.me.picFileName
-      picModel = app.me.files.get(app.me.picFileName)
-      if picModel then picModel.destroy()
 
     # Fetch file list object.
     files = e.target.files or e.dataTransfer.files
