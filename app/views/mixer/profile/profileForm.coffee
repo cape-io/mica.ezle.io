@@ -11,6 +11,9 @@ data = require '../../../data/studentSchema'
 profileFields = data.props
 delete profileFields.pic
 delete profileFields.location
+delete profileFields.twitter
+delete profileFields.facebook
+delete profileFields.instagram
 
 module.exports = React.createClass
   getInitialState: ->
