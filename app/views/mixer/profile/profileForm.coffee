@@ -10,6 +10,7 @@ profilePic = require './profileImgUpload'
 data = require '../../../data/studentSchema'
 profileFields = data.props
 delete profileFields.pic
+delete profileFields.location
 
 module.exports = React.createClass
   getInitialState: ->
