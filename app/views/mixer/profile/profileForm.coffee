@@ -1,6 +1,5 @@
 React = require 'react'
 {div, h2, p, form, fieldset, img} = require 'reactionary'
-Input = require 'react-bootstrap/Input'
 _ = require 'lodash'
 
 editableField = require '../editableField'

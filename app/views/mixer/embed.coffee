@@ -5,13 +5,17 @@ editableField = require './editableField'
 
 module.exports = React.createClass
   getInitialState: ->
-    fieldQty: app.me.embeds.length or 1
     editField: null
+    newField: false
 
   addField: (e) ->
     e.preventDefault()
-    if @state.fieldQty < 20
-      @setState fieldQty: @state.fieldQty + 1
+    if app.me.embeds.length < 20
+      nextId = parseInt(_.last(app.me.embeds.pluck('id')))+1
+      console.log nextId
+      @setState
+        newField: true
+        editField: nextId+''
 
   editField: (fieldId) ->
     @setState editField: fieldId
@@ -24,7 +28,11 @@ module.exports = React.createClass
     model = @getModel(fieldId)
     if model
       console.log 'Save field to metadata.', fieldId, value
-      model.set 'uri', value
+      if value
+        model.set 'uri', value
+      else
+        app.me.embeds.remove(model)
+        app.me.save()
     else
       console.log 'Create embed model.', fieldId, value
       app.me.embeds.add
@@ -43,9 +51,10 @@ module.exports = React.createClass
     console.log 'updated'
     @forceUpdate()
 
-  embedField: (fieldId) ->
-    fieldId = (fieldId+1)+''
-    model = @getModel fieldId
+  embedField: (model) ->
+#    fieldId = (fieldId+1)+''
+#    model = @getModel fieldId
+    fieldId = model.id
     props =
       help: 'Paste in a URL from a website like youtube, vimeo, soundcloud etc.'
       label: 'Media Link'
@@ -81,9 +90,9 @@ module.exports = React.createClass
         preview
 
   render: ->
-    fieldQty = @state.fieldQty
-    embeds = _.map _.range(fieldQty), @embedField
-
+    embeds = app.me.embeds.map @embedField
+    if @state.newField and @state.editField
+      embeds.push @embedField({id: @state.editField})
     form
       className: 'form-horizontal col-md-6',
         embeds
