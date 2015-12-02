@@ -5,7 +5,5 @@
 /app/*/*.js
 /app/*/*/*.js
 /dev/
-
 /app/data/commit.json
-
 /app/data/api.json
